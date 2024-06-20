@@ -1,137 +1,66 @@
 return {
 	{
-		"folke/tokyonight.nvim",
+		"rebelot/kanagawa.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("tokyonight").setup({
-				style = "moon", -- `storm`, `moon`, a darker variant `night` and `day`
-				transparent = false, -- Enable this to disable setting the background color
-				terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
-				styles = {
-					comments = { italic = true },
-					keywords = { italic = true, underline = true },
-					functions = { bold = true, italic = true },
-					variables = {},
-					-- Background styles. Can be "dark", "transparent" or "normal"
-					sidebars = "dark", -- style for sidebars, see below
-					floats = "transparent", -- style for floating windows
+			require("kanagawa").setup({
+				compile = false, -- enable compiling the colorscheme
+				undercurl = true, -- enable undercurls
+				commentStyle = { italic = true },
+				functionStyle = { bold = true, italic = true },
+				keywordStyle = { italic = true, underline = true },
+				statementStyle = { bold = true },
+				typeStyle = {},
+				transparent = true, -- do not set background color
+				dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+				terminalColors = true, -- define vim.g.terminal_color_{0,17}
+				colors = { -- add/modify theme and palette colors
+					palette = {},
+					theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
 				},
-				sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-				hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-				dim_inactive = false, -- dims inactive windows
-				lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
-			})
-
-			--vim.cmd [[
-			--colorscheme tokyonight
-			--]]
-		end,
-	},
-
-	{
-		"navarasu/onedark.nvim",
-		name = "onedark",
-		config = function()
-			require("onedark").setup({
-				style = "darker", --'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-				transparent = false, -- Show/hide background
-				term_colors = true,
-				code_style = {
-					comments = "italic",
-					keywords = "italic,underline",
-					functions = "bold,italic",
-					strings = "none",
-					variables = "none",
+				overrides = function(colors)
+					local theme = colors.theme
+					return {
+						TelescopeTitle = { fg = theme.ui.special, bold = true },
+						TelescopePromptNormal = { bg = theme.ui.bg_p1 },
+						TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
+						TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
+						TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
+						TelescopePreviewNormal = { bg = theme.ui.bg_dim },
+						TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+						Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
+						PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+						PmenuSbar = { bg = theme.ui.bg_m1 },
+						PmenuThumb = { bg = theme.ui.bg_p2 },
+					}
+				end,
+				theme = "wave",
+				background = {
+					dark = "dragon",
+					light = "lotus",
 				},
 			})
 
-			--require('onedark').load()
-			-- vim.cmd([[ colorscheme onedark ]])
+			-- vim.cmd("colorscheme kanagawa")
+			-- vim.cmd("colorscheme kanagawa-wave")
+			-- vim.cmd("colorscheme kanagawa-dragon")
+			-- vim.cmd("colorscheme kanagawa-lotus")
 		end,
 	},
 
 	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-
-		config = function()
-			require("rose-pine").setup({
-				variant = "moon", -- auto, main, moon, or dawn
-				dark_variant = "moon", -- main, moon, or dawn
-			})
-			vim.cmd("colorscheme rose-pine-moon")
-		end,
-	},
-
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"sainnhe/sonokai",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				term_colors = true,
-				transparent_background = false,
-				styles = {
-					comments = { "italic" },
-					conditionals = {},
-					loops = { "bold" },
-					functions = { "bold", "italic" },
-					keywords = { "italic", "underline" },
-					strings = {},
-					variables = {},
-					numbers = {},
-					booleans = { "italic" },
-					properties = {},
-					types = {},
-					operators = {},
-				},
-				-- color_overrides = {
-				-- mocha = {
-				-- base = "#000000",
-				-- mantle = "#000000",
-				-- crust = "#000000",
-				-- },
-				-- },
-				integrations = {
-					fidget = true,
-					gitsigns = true,
-					harpoon = true,
-					indent_blankline = {
-						enabled = false,
-						scope_color = "sapphire",
-						colored_indent_levels = false,
-					},
-					mason = true,
-					neogit = true,
-					cmp = true,
-					dap = true,
-					dap_ui = true,
-					native_lsp = {
-						enabled = true,
-						virtual_text = {
-							errors = { "italic" },
-							hints = { "italic" },
-							warnings = { "italic" },
-							information = { "italic" },
-						},
-						underlines = {
-							errors = { "underline" },
-							hints = { "underline" },
-							warnings = { "underline" },
-							information = { "underline" },
-						},
-						inlay_hints = {
-							background = true,
-						},
-						treesitter = true,
-						telescope = true,
-						lsp_trouble = true,
-					},
-				},
-			})
-			-- vim.cmd("colorscheme catppuccin")
+			-- Optionally configure and load the colorscheme
+			-- directly inside the plugin declaration.
+			vim.g.sonokai_enable_italic = true
+			vim.cmd([[
+						let g:sonokai_style = 'andromeda'
+			]])
+			vim.cmd.colorscheme("sonokai")
 		end,
 	},
 }

@@ -18,7 +18,7 @@ return {
 
 		lualine.setup({
 			options = {
-				theme = "onedark",
+				theme = "sonokai", --"kanagawa" -- "onedark"
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 			},
