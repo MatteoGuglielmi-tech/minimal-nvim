@@ -1,0 +1,4 @@
+spell/
+lua/lualine/
+init.lua
+lazy-lock.json
