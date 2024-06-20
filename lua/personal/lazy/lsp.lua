@@ -174,7 +174,6 @@ return {
 		vim.list_extend(ensure_installed, {
 			-- formatters
 			"stylua",
-			"autoflake",
 			"autopep8",
 			-- 'black',
 			"clang-format",
