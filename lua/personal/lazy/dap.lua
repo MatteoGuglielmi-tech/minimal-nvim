@@ -89,19 +89,19 @@ return {
 			ensure_installed = {
 				-- debuggers
 				"debugpy",
-				"bash-debug-adapter",
-				"bibtex-tidy",
+				-- "bash-debug-adapter",
 			},
 		})
-		require("nvim-dap-virtual-text").setup()
+
+		require("nvim-dap-virtual-text").setup({})
 
 		local map = function(obj, icon, thl, lhl, nhl)
 			vim.fn.sign_define(obj, { text = icon, texthl = thl, linehl = lhl, numhl = nhl })
 		end
 
-		map("DapBreakpoint", "", "DiagnosticsSignWarn", "", "")
-		map("DapBreakpointRejected", "", "DiagnosticsSignError", "", "")
-		map("DapStopped", "", "DiagnosticSignWarn", "Visual", "DiagnosticSignWarn")
+		map("DapBreakpoint", "🐛", "DiagnosticsSignWarn", "", "")
+		map("DapBreakpointRejected", "❌", "DiagnosticsSignError", "", "")
+		map("DapStopped", "⛔", "DiagnosticSignWarn", "Visual", "DiagnosticSignWarn")
 
 		dap.set_log_level("info")
 
@@ -118,8 +118,32 @@ return {
 		dapui.setup(ui.config)
 		vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "Debug: See last session result." })
 
-		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-		dap.listeners.before.event_exited["dapui_config"] = dapui.close
+		dap.listeners.before.attach.dapui_config = function()
+			dapui.open()
+		end
+		dap.listeners.before.launch.dapui_config = function()
+			dapui.open()
+		end
+		dap.listeners.before.event_terminated.dapui_config = function()
+			dapui.close()
+		end
+		dap.listeners.before.event_exited.dapui_config = function()
+			dapui.close()
+		end
+
+		local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
+		pcall(function()
+			-- /home/matteo/.local/share/nvim/mason/packages/debugpy/venv/bin
+			require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
+		end)
+
+		table.insert(require("dap").configurations.python, {
+			type = "python",
+			request = "launch",
+			args = "-Xfrozen_modules=off",
+			name = "Python launch config",
+			program = "${file}",
+			-- ... more options, see https://github.com/microsoft/debugpy/wiki/Debugsconfiguration-settings
+		})
 	end,
 }
