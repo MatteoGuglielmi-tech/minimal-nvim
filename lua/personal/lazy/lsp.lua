@@ -166,6 +166,13 @@ return {
 			rust_analyzer = {},
 		}
 
+		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+			border = "rounded",
+			focus = false,
+			focusable = true,
+			close_events = { "CursorMoved", "BufHidden", "InsertCharPre" },
+		})
+
 		require("mason").setup()
 
 		-- You can add other tools here that you want Mason to install

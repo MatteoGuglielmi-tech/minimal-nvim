@@ -12,5 +12,15 @@ vim.keymap.set(
 
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")
 pcall(function()
+	-- /home/matteo/.local/share/nvim/mason/packages/debugpy/venv/bin
 	require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
 end)
+
+table.insert(require("dap").configurations.python, {
+	type = "python",
+	request = "launch",
+	args = "-Xfrozen_modules=off",
+	name = "Python launch config",
+	program = "${file}",
+	-- ... more options, see https://github.com/microsoft/debugpy/wiki/Debugsconfiguration-settings
+})

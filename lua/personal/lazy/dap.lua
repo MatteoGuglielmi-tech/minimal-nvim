@@ -75,6 +75,7 @@ return {
 		"nvim-neotest/nvim-nio",
 		"williamboman/mason.nvim",
 		"jay-babu/mason-nvim-dap.nvim",
+		"theHamsta/nvim-dap-virtual-text",
 		-- custom debugger
 		"mfussenegger/nvim-dap-python",
 	},
@@ -92,6 +93,7 @@ return {
 				"bibtex-tidy",
 			},
 		})
+		require("nvim-dap-virtual-text").setup()
 
 		local map = function(obj, icon, thl, lhl, nhl)
 			vim.fn.sign_define(obj, { text = icon, texthl = thl, linehl = lhl, numhl = nhl })
