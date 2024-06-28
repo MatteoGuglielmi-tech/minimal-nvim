@@ -23,7 +23,7 @@ return {
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "autopep8", "isort" },
-			c = { "clangd-format" },
+			c = { "clang-format" },
 			bash = { "shfmt" },
 			yaml = { "yamlfix" },
 			markdown = { "cbfmt" },
