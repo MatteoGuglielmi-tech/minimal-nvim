@@ -57,10 +57,45 @@ return {
 			-- Optionally configure and load the colorscheme
 			-- directly inside the plugin declaration.
 			vim.g.sonokai_enable_italic = true
-			vim.cmd([[
-						let g:sonokai_style = 'andromeda'
-			]])
-			vim.cmd.colorscheme("sonokai")
+			-- vim.cmd([[
+			-- 			let g:sonokai_style = 'andromeda'
+			-- ]])
+			-- vim.cmd.colorscheme("sonokai")
+		end,
+	},
+
+	{
+		"loctvl842/monokai-pro.nvim",
+		config = function()
+			require("monokai-pro").setup({
+				transparent_background = false,
+				terminal_colors = true,
+				devicons = true, -- highlight the icons of `nvim-web-devicons`
+				styles = {
+					comment = { italic = true },
+					keyword = { italic = true }, -- any other keyword
+					type = { italic = true }, -- (preferred) int, long, char, etc
+					storageclass = { italic = true }, -- static, register, volatile, etc
+					structure = { italic = true }, -- struct, union, enum, etc
+					parameter = { italic = true }, -- parameter pass in function
+					annotation = { italic = true },
+					tag_attribute = { italic = true }, -- attribute of tag in reactjs
+				},
+				filter = "machine", -- classic | octagon | pro | machine | ristretto | spectrum
+				inc_search = "background", -- underline | background
+				background_clear = {
+					"float_win",
+					"telescope",
+					"nvim-tree",
+				},
+				plugins = {
+					indent_blankline = {
+						context_highlight = "default", -- default | pro
+						context_start_underline = false,
+					},
+				},
+			})
+			vim.cmd([[colorscheme monokai-pro]])
 		end,
 	},
 }
