@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 
 -- this autocommand enables spell checking and line wrapping for filetypes in "pattern"
 vim.api.nvim_create_autocmd({ "FileType" }, {
-	pattern = { "gitcommit", "markdown", "NeogitCommitMessage", "latex" },
+	pattern = { "gitcommit", "markdown", "NeogitCommitMessage", "latex", "plaintex", "tex" },
 	callback = function()
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = true
