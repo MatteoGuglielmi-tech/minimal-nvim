@@ -1,4 +1,5 @@
-vim.g.has_nerd_font = false
+vim.g.has_nerd_font = true
+vim.g.tex_flavor = "latex"
 
 vim.opt.number = true
 vim.opt.relativenumber = true

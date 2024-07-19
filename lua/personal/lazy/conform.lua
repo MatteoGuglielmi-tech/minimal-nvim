@@ -27,7 +27,7 @@ return {
 			bash = { "shfmt" },
 			yaml = { "yamlfix" },
 			markdown = { "cbfmt" },
-			["*"] = { "codespell" },
+			["*"] = {},
 		},
 	},
 }
