@@ -37,3 +37,6 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
+
+vim.opt.smartcase = true
+vim.opt.ignorecase = true -- ignore case in search patterns
