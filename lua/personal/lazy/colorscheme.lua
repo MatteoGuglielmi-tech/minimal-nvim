@@ -1,70 +1,5 @@
 return {
 	{
-		"rebelot/kanagawa.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("kanagawa").setup({
-				compile = false, -- enable compiling the colorscheme
-				undercurl = true, -- enable undercurls
-				commentStyle = { italic = true },
-				functionStyle = { bold = true, italic = true },
-				keywordStyle = { italic = true, underline = true },
-				statementStyle = { bold = true },
-				typeStyle = {},
-				transparent = true, -- do not set background color
-				dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-				terminalColors = true, -- define vim.g.terminal_color_{0,17}
-				colors = { -- add/modify theme and palette colors
-					palette = {},
-					theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-				},
-				overrides = function(colors)
-					local theme = colors.theme
-					return {
-						TelescopeTitle = { fg = theme.ui.special, bold = true },
-						TelescopePromptNormal = { bg = theme.ui.bg_p1 },
-						TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-						TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
-						TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
-						TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-						TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
-						Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
-						PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-						PmenuSbar = { bg = theme.ui.bg_m1 },
-						PmenuThumb = { bg = theme.ui.bg_p2 },
-					}
-				end,
-				theme = "wave",
-				background = {
-					dark = "dragon",
-					light = "lotus",
-				},
-			})
-
-			-- vim.cmd("colorscheme kanagawa")
-			-- vim.cmd("colorscheme kanagawa-wave")
-			-- vim.cmd("colorscheme kanagawa-dragon")
-			-- vim.cmd("colorscheme kanagawa-lotus")
-		end,
-	},
-
-	{
-		"sainnhe/sonokai",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			-- Optionally configure and load the colorscheme
-			-- directly inside the plugin declaration.
-			vim.g.sonokai_enable_italic = true
-			-- vim.cmd([[
-			-- 			let g:sonokai_style = 'andromeda'
-			-- ]])
-			-- vim.cmd.colorscheme("sonokai")
-		end,
-	},
-
-	{
 		"loctvl842/monokai-pro.nvim",
 		config = function()
 			require("monokai-pro").setup({
@@ -81,7 +16,7 @@ return {
 					annotation = { italic = true },
 					tag_attribute = { italic = true }, -- attribute of tag in reactjs
 				},
-				filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
+				filter = "spectrum", -- classic | octagon | pro | machine | ristretto | spectrum
 				inc_search = "background", -- underline | background
 				background_clear = {
 					"float_win",
@@ -95,7 +30,142 @@ return {
 					},
 				},
 			})
-			vim.cmd([[colorscheme monokai-pro]])
+			-- vim.cmd([[colorscheme monokai-pro]])
+		end,
+	},
+
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				flavour = "macchiato", -- latte, frappe, macchiato, mocha
+				background = { -- :h background
+					light = "latte",
+					dark = "mocha",
+				},
+				styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+					comments = { "italic" },
+					conditionals = {},
+					loops = { "underline" },
+					functions = { "bold" },
+					keywords = { "underdashed" },
+					strings = {},
+					variables = {},
+					numbers = {},
+					booleans = {},
+					properties = { "italic" },
+					types = {},
+					operators = {},
+					-- miscs = {}, -- Uncomment to turn off hard-coded styles
+				},
+				default_integrations = true,
+				integrations = {
+					cmp = true,
+					gitsigns = true,
+					treesitter = true,
+					fidget = false,
+					harpoon = false,
+					indent_blankline = {
+						enabled = true,
+						scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+						colored_indent_levels = false,
+					},
+					mason = false,
+					neogit = true,
+					dap = true,
+					dap_ui = true,
+					native_lsp = {
+						enabled = true,
+						inlay_hints = {
+							background = true,
+						},
+					},
+					nvim_surround = false,
+					telescope = {
+						enabled = true,
+					},
+					lsp_trouble = false,
+				},
+			})
+
+			-- setup must be called before loading
+			vim.cmd.colorscheme("catppuccin")
+		end,
+	},
+
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("tokyonight").setup({
+				style = "storm",
+				-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+				on_colors = function(colors)
+					colors.hint = colors.orange
+					colors.error = "#ff0000"
+				end,
+				on_highlights = function(hl, c)
+					local prompt = "#2d3149"
+					hl.TelescopeNormal = {
+						bg = c.bg_dark,
+						fg = c.fg_dark,
+					}
+					hl.TelescopeBorder = {
+						bg = c.bg_dark,
+						fg = c.bg_dark,
+					}
+					hl.TelescopePromptNormal = {
+						bg = prompt,
+					}
+					hl.TelescopePromptBorder = {
+						bg = prompt,
+						fg = prompt,
+					}
+					hl.TelescopePromptTitle = {
+						bg = prompt,
+						fg = prompt,
+					}
+					hl.TelescopePreviewTitle = {
+						bg = c.bg_dark,
+						fg = c.bg_dark,
+					}
+					hl.TelescopeResultsTitle = {
+						bg = c.bg_dark,
+						fg = c.bg_dark,
+					}
+				end,
+			})
+			-- vim.cmd([[colorscheme tokyonight-storm]])
+		end,
+	},
+	{
+		"projekt0n/github-nvim-theme",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("github-theme").setup({
+				options = {
+					compile_path = vim.fn.stdpath("cache") .. "/github-theme",
+					styles = {
+						comments = "italic",
+						functions = "bold, underline",
+						keywords = "bold",
+						variables = "NONE",
+						conditionals = "NONE",
+						constants = "NONE",
+						numbers = "NONE",
+						operators = "NONE",
+						strings = "italic",
+						types = "NONE",
+					},
+				},
+			})
+
+			-- vim.cmd("colorscheme github_dark_dimmed")
+			-- vim.cmd("colorscheme github_dark")
 		end,
 	},
 }
