@@ -28,6 +28,7 @@ vim.keymap.set("n", "g#", "g#zz", { desc = "Find previous occurrence of selected
 -- visualize messages by nvim
 vim.keymap.set("c", "mes", "<cmd>messages<CR><esc>", { desc = "Shows messages by neovim" })
 vim.keymap.set("c", "emes", "<esc><cmd>echo v:errmsg<CR>", { desc = "Shows error messages by neovim" })
+vim.keymap.set("c", "w!!", "<cmd>w !sudo tee > /dev/null %<CR><esc>", { desc = "Write file with sudo priviledges" })
 
 -- yanking
 vim.keymap.set("n", "P", '"0p', { desc = "Yank from register 0" })

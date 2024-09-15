@@ -99,13 +99,13 @@ return {
 			vim.fn.sign_define(obj, { text = icon, texthl = thl, linehl = lhl, numhl = nhl })
 		end
 
-		map("DapBreakpoint", "🐛", "DiagnosticsSignWarn", "", "")
-		map("DapBreakpointRejected", "❌", "DiagnosticsSignError", "", "")
-		map("DapStopped", "⛔", "DiagnosticSignWarn", "Visual", "DiagnosticSignWarn")
+		map("DapBreakpoint", "🐞", "DiagnosticsSignWarn", "", "")
+		map("DapBreakpointRejected", "🚫", "DiagnosticsSignError", "", "")
+		map("DapStopped", "🚩", "DiagnosticSignWarn", "Visual", "DiagnosticSignWarn")
 
 		dap.set_log_level("info")
+		dapui.setup(ui.config)
 
-		-- Basic debugging keymaps, feel free to change to your liking!
 		vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Debug: Start/Continue" })
 		vim.keymap.set("n", "<leader>ds", dap.step_into, { desc = "Debug: Step Into" })
 		vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Debug: Step Over" })

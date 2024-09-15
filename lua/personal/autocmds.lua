@@ -99,7 +99,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.keymap.set(
 			{ "i", "v" },
-			"<C-s>",
+			"<C-/>",
 			vim.lsp.buf.signature_help,
 			{ buffer = event.buf, desc = "Signature help" }
 		)
