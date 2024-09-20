@@ -99,33 +99,43 @@ return {
 			vim.fn.sign_define(obj, { text = icon, texthl = thl, linehl = lhl, numhl = nhl })
 		end
 
+		local cond_breakpoint = function()
+			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+		end
+
+		local dap_ui_hover = function()
+			dap.ui.widgets.hover()
+		end
+
+		local dap_ui_eval = function()
+			dapui.eval(vim.fn.input("[Expression] > "))
+		end
+
 		map("DapBreakpoint", "🐞", "DiagnosticsSignWarn", "", "")
 		map("DapBreakpointRejected", "🚫", "DiagnosticsSignError", "", "")
-		map("DapStopped", "🚩", "DiagnosticSignWarn", "Visual", "DiagnosticSignWarn")
+		map("DapStopped", "🚨", "DiagnosticSignWarn", "Visual", "DiagnosticSignWarn")
 
 		dap.set_log_level("info")
 
-		vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Debug: Start/Continue" })
-		vim.keymap.set("n", "<leader>dr", dap.restart, { desc = "Debug: ReStart" })
-		vim.keymap.set("n", "<leader>dq", dap.terminate, { desc = "Debug : Terminate" })
-		vim.keymap.set("n", "<leader>dd", dap.disconnect, { desc = "Debug : Disconnect" })
-		vim.keymap.set("n", "<leader>dC", dap.close, { desc = "Debug : Close" })
-		vim.keymap.set("n", "<leader>ds", dap.step_into, { desc = "Debug: Step Into" })
-		vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Debug: Step Over" })
-		vim.keymap.set("n", "<leader>du", dap.step_out, { desc = "Debug: Step Out" })
+		vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
+		vim.keymap.set("n", "<C-S-F5>", dap.restart, { desc = "Debug: ReStart" })
+		vim.keymap.set("n", "<C-F5>", dap.terminate, { desc = "Debug : Terminate" })
+		vim.keymap.set("n", "<C-M-F5>", dap.close, { desc = "Debug : Close" })
+		vim.keymap.set("n", "<F6>", dap.run_to_cursor, { desc = "Run to cursor" })
+		vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Debug: Step Over" })
+		vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Debug: Step Into" })
+		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Debug: Step Out" })
+
+		vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+		vim.keymap.set("n", "<leader>dB", cond_breakpoint, { desc = "Debug: Set Breakpoint" })
+		vim.keymap.set("n", "<leader>de", dap_ui_eval, { desc = "Evaluate Input" })
+
+		vim.keymap.set("n", "<leader>dD", dap.disconnect, { desc = "Debug : Disconnect" })
 		vim.keymap.set("n", "<leader>di", dap.step_back, { desc = "Debug: Step Back" })
-		vim.keymap.set("n", "<leader>dw", dap.reverse_continue, { desc = "Debug: Reverse execution until prev bp" })
-		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-		vim.keymap.set("n", "<leader>dk", dap.up, { desc = "Debug: Go up in stacktrace without stepping" })
-		vim.keymap.set("n", "<leader>dj", dap.down, { desc = "Debug: Go down in stacktrace without stepping" })
-		vim.keymap.set("n", "<leader>dB", function()
-			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end, { desc = "Debug: Set Breakpoint" })
-		vim.keymap.set("n", "<leader>dK", function()
-			dap.ui.widgets.hover()
-		end, { desc = "Debug : Info expression under cursor" })
 
 		dapui.setup(ui.config)
+
+		vim.keymap.set("n", "<leader>dK", dap_ui_hover, { desc = "Debug : Info expression under cursor" })
 		vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "Debug: See last session result." })
 
 		dap.listeners.before.attach.dapui_config = function()
