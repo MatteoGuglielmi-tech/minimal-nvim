@@ -20,20 +20,20 @@ local ui = {
 		layouts = {
 			{
 				elements = {
-					{ id = "scopes", size = 0.33 },
-					{ id = "breakpoints", size = 0.17 },
-					{ id = "stacks", size = 0.25 },
-					{ id = "watches", size = 0.25 },
+					{ id = "scopes", size = 0.55 },
+					{ id = "breakpoints", size = 0.1 },
+					{ id = "stacks", size = 0.35 },
+					-- { id = "watches", size = 0.25 },
 				},
-				size = 0.33,
-				position = "right",
+				size = 0.1,
+				position = "left",
 			},
 			{
 				elements = {
-					{ id = "repl", size = 0.45 },
-					{ id = "console", size = 0.55 },
+					-- { id = "repl", size = 0.45 },
+					{ id = "console", size = 0.9 },
 				},
-				size = 0.27,
+				size = 0.2,
 				position = "bottom",
 			},
 		},
@@ -156,6 +156,8 @@ return {
 			-- /home/matteo/.local/share/nvim/mason/packages/debugpy/venv/bin
 			require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
 		end)
+
+		require("dap.ext.vscode").load_launchjs(nil, { debugpy = { "python" } })
 
 		-- table.insert(require("dap").configurations.python, {
 		-- 	type = "python",

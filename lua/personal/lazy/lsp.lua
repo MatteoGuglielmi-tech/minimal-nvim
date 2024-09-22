@@ -11,7 +11,7 @@ return {
 			opts = {},
 			dependencies = { "MunifTanjim/nui.nvim" },
 		},
-		{ "folke/neodev.nvim", opts = {} },
+		-- { "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
 		local util = require("lspconfig.util")
