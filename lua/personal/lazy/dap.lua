@@ -118,7 +118,7 @@ return {
 		dap.set_log_level("info")
 
 		vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
-		vim.keymap.set("n", "<C-S-F5>", dap.restart, { desc = "Debug: ReStart" })
+		vim.keymap.set("n", "<S-F5>", dap.restart, { desc = "Debug: ReStart" })
 		vim.keymap.set("n", "<C-F5>", dap.terminate, { desc = "Debug : Terminate" })
 		vim.keymap.set("n", "<C-M-F5>", dap.close, { desc = "Debug : Close" })
 		vim.keymap.set("n", "<F6>", dap.run_to_cursor, { desc = "Run to cursor" })
@@ -157,6 +157,7 @@ return {
 			require("dap-python").setup(mason_path .. "packages/debugpy/venv/bin/python")
 		end)
 
+		-- looks for .vscode/launch.json
 		require("dap.ext.vscode").load_launchjs(nil, { debugpy = { "python" } })
 
 		-- table.insert(require("dap").configurations.python, {
