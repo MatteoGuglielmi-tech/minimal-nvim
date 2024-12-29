@@ -1,4 +1,5 @@
 spell/
 lua/lualine/
-init.lua
-lazy-lock.json
+.DS_STORE
+lua/.DS_STORE
+.json
