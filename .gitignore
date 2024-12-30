@@ -2,4 +2,4 @@ spell/
 lua/lualine/
 .DS_STORE
 lua/.DS_STORE
-.json
+*.json
