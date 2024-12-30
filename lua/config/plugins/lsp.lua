@@ -68,6 +68,16 @@ return {
 			"yamlfix",
 			-- md
 			"cbfmt",
+
+			-- linters
+			-- c
+			"cpplint",
+			-- commit
+			"commitlint",
+			-- md
+			"markdownlint",
+			-- bash
+			"shellcheck",
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
