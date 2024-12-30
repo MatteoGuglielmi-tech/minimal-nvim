@@ -7,14 +7,14 @@ return {
 			function()
 				require("conform").format({ async = true, lsp_fallback = true })
 			end,
-			mode = "",
+			mode = "n",
 			desc = "[F]ormat buffer",
 		},
 	},
 	opts = {
 		notify_on_error = false,
 		format_on_save = function(bufnr)
-			local disable_filetypes = { c = true, cpp = true }
+			local disable_filetypes = { json = true, txt = false }
 			return {
 				timeout_ms = 500,
 				lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -22,8 +22,8 @@ return {
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "autopep8", "isort", "docformatter" },
-			mojo = { "mojo_formatter" },
+			python = { "black", "isort", "docformatter" },
+			-- mojo = { "mojo_formatter" },
 			c = { "clang-format" },
 			bash = { "shfmt" },
 			yaml = { "yamlfix" },

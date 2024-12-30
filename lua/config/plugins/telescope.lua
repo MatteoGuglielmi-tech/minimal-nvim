@@ -68,7 +68,7 @@ return {
 
 		-- Shortcut for searching your Neovim configuration files
 		vim.keymap.set("n", "<leader>fn", function()
-			builtin.find_files({ cwd = vim.fn.stdpath("config") })
+			builtin.find_files({ cwd = vim.fn.stdpath("config"), prompt_title = "Search Neovim config" })
 		end, { desc = "[F]ind [N]eovim files" })
 
 		require("config.telescope.multigrep").setup()

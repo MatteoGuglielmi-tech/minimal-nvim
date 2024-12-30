@@ -28,8 +28,7 @@ return {
 		require("rainbow-delimiters.setup").setup({ highlight = highlight })
 		require("ibl").setup({
 			scope = { highlight = highlight },
-			-- ,
-			-- indent = { highlight = highlight }
+			-- indent = { highlight = highlight },
 		})
 
 		hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)

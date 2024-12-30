@@ -2,8 +2,9 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- vim.opt.list = true
--- vim.opt.listchars:append('trail = ·')
+vim.opt.list = true
+vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
+
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
