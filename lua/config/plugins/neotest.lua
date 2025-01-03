@@ -18,6 +18,28 @@ return {
 					runner = "pytest",
 					python = (vim.fn.expand("$CONDA_PREFIX")) .. "/bin/python",
 				}),
+
+				vim.keymap.set("n", "<leader>rt", function()
+					require("neotest").run.run()
+				end, { desc = "[R]un the nearest [T]est" }),
+				vim.keymap.set("n", "<leader>rf", function()
+					require("neotest").run.run(vim.fn.expand("%"))
+				end, { desc = "[R]un the current [F]ile" }),
+				vim.keymap.set("n", "<leader>dt", function()
+					require("neotest").run.run({ strategy = "dap" })
+				end, { desc = "[D]ebug the nearest [T]est" }),
+				vim.keymap.set("n", "<leader>st", function()
+					require("neotest").run.stop()
+				end, { desc = "[S]top the nearest [T]est" }),
+				vim.keymap.set("n", "<leader>at", function()
+					require("neotest").run.attach()
+				end, { desc = "[A]ttach the nearest [T]est" }),
+				vim.keymap.set("n", "<leader>ot", function()
+					require("neotest").output()
+				end, { desc = "Displays [O]utput of the [T]est" }),
+				vim.keymap.set("n", "<leader>wt", function()
+					require("neotest").watch()
+				end, { desc = "[W]atch files related to [T]ests for changes and re-run tests" }),
 			},
 		})
 	end,
