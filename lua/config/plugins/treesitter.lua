@@ -3,7 +3,6 @@
 return {
 	-- "nvim-treesitter/nvim-treesitter-context",
 	"nvim-treesitter/nvim-treesitter-textobjects",
-	lazy = true,
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	build = ":TSUpdate",
 	config = function()
