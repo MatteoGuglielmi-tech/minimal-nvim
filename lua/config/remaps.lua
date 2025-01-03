@@ -1,6 +1,10 @@
 vim.keymap.set("n", "<space>", " ", {})
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("n", "<space><space>x", function()
+	vim.cmd("source %")
+	print("Msg: current file successfully sourced via keymap")
+end, { desc = "Source current file" })
 
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
