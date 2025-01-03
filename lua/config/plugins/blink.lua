@@ -20,6 +20,8 @@ return {
 
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer" },
+			-- disable blink completion on cmdline
+			-- cmdline = {},
 		},
 
 		-- non-default opts
@@ -28,15 +30,15 @@ return {
 
 			menu = {
 				auto_show = true,
-				draw = {
-					columns = {
-						{ "label", "label_description", gap = 1 },
-						{ "kind_icon", "kind" },
-					},
-				},
+				-- draw = {
+				-- 	columns = {
+				-- 		{ "label", "label_description", gap = 1 },
+				-- 		{ "kind_icon", "kind" },
+				-- 	},
+				-- },
 			},
 
-			ghost_text = { enabled = true },
+			ghost_text = { enabled = false },
 			documentation = { auto_show = true, auto_show_delay_ms = 500 },
 		},
 	},
