@@ -23,14 +23,26 @@ vim.g.maplocalleader = " "
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		{ "nvim-lua/plenary.nvim", priority = 100 },
+		{ "nvim-lua/plenary.nvim", priority = 1000 },
 		{ "tpope/vim-sleuth" },
+		-- {
+		-- 	"folke/tokyonight.nvim",
+		-- 	config = function()
+		-- 		vim.cmd.colorscheme("tokyonight")
+		-- 	end,
+		-- },
+		{
+			"EdenEast/nightfox.nvim",
+			lazy = false,
+			priority = 100,
+			config = function()
+				vim.cmd("colorscheme nordfox")
+				-- vim.cmd("colorscheme duskfox")
+			end,
+		},
 		{ import = "config.plugins" },
 	},
 	-- automatically check for plugin updates
 	checker = { enabled = true },
-	change_detection = {
-		enabled = false,
-		notify = false,
-	},
+	change_detection = { enabled = false, notify = false },
 })
