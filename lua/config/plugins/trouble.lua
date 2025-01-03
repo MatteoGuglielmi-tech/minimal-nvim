@@ -1,7 +1,7 @@
 return {
 	{
 		"folke/trouble.nvim",
-		dependencies = { "echasnovski/mini.icons" },
+		-- dependencies = { "echasnovski/mini.icons" },
 		opts = {},
 		cmd = "Trouble",
 		keys = {

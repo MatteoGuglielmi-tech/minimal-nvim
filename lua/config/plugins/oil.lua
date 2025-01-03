@@ -3,7 +3,15 @@ return {
 		"stevearc/oil.nvim",
 		---@module 'oil'
 		---@type oil.SetupOpts
-		dependencies = { "echasnovski/mini.icons" },
+		dependencies = {
+			{
+				"echasnovski/mini.icons",
+				version = "*",
+				config = function()
+					require("mini.icons").setup()
+				end,
+			},
+		},
 		-- dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("oil").setup({
