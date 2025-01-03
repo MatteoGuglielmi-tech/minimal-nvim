@@ -13,7 +13,7 @@ return {
 
 	config = function()
 		local lualine = require("lualine")
-		local lazy_status = require("lazy.status")
+		-- local lazy_status = require("lazy.status")
 
 		local trouble = require("trouble")
 		local symbols = trouble.statusline({
@@ -27,7 +27,7 @@ return {
 
 		lualine.setup({
 			options = {
-				theme = "catppuccin", --"tokyonight", --"monokai-pro", --"kanagawa" -- "onedark"
+				theme = "duskfox", --"tokyonight", --"monokai-pro", --"kanagawa" -- "onedark"
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 			},
@@ -35,15 +35,10 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = {
 					{ "branch", icon = "" },
-					"harpoon_component",
+					-- "harpoon_component",
 					{
 						"diff",
 						colored = true,
-						diff_color = {
-							added = "LuaLineDiffAdd", -- Changes the diff's added color
-							modified = "LuaLineDiffChange", -- Changes the diff's modified color
-							removed = "LuaLineDiffDelete", -- Changes the diff's removed color you
-						},
 						symbols = { added = "+", modified = "~", removed = "-" }, -- Changes the symbols used by the diff.
 						source = nil,
 					},
@@ -51,17 +46,9 @@ return {
 						"diagnostics",
 						sources = { "nvim_diagnostic" },
 						sections = { "error", "warn", "info", "hint" },
-
-						diagnostics_color = {
-							error = "DiagnosticError", -- Changes diagnostics' error color.
-							warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
-							info = "DiagnosticInfo", -- Changes diagnostics' info color.
-							hint = "DiagnosticHint", -- Changes diagnostics' hint color.
-						},
-						-- symbols = { error = "E", warn = "W", info = "I", hint = "H" },
-						colored = true, -- Displays diagnostics status in color if set to true.
-						update_in_insert = false, -- Update diagnostics in insert mode.
-						always_visible = false, -- Show diagnostics even if there are none.
+						colored = true,
+						update_in_insert = false,
+						always_visible = false,
 					},
 					{ "filename", path = 1 },
 				},
@@ -72,17 +59,17 @@ return {
 					},
 				},
 				lualine_x = {
-					{
-						lazy_status.updates,
-						cond = lazy_status.has_updates,
-						color = { fg = "#ff9e64" },
-					},
+					-- {
+					-- 	lazy_status.updates,
+					-- 	cond = lazy_status.has_updates,
+					-- 	color = { fg = "#ff9e64" },
+					-- },
 					{ "encoding" },
 					{
 						"fileformat",
 						symbols = {
 							unix = "", -- e712
-							dos = "", -- e70f
+							-- dos = "", -- e70f
 							mac = "", -- e711
 						},
 					},
