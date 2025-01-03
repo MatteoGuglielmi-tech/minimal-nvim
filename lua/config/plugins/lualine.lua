@@ -1,33 +1,13 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	-- dependencies = { "nvim-tree/nvim-web-devicons" },
-	dependencies = {
-		{
-			"echasnovski/mini.icons",
-			version = "*",
-			config = function()
-				require("mini.icons").setup()
-			end,
-		},
-	},
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 
 	config = function()
 		local lualine = require("lualine")
-		-- local lazy_status = require("lazy.status")
-
-		local trouble = require("trouble")
-		local symbols = trouble.statusline({
-			mode = "lsp_document_symbols",
-			groups = {},
-			title = false,
-			filter = { range = true },
-			format = "{kind_icon}{symbol.name}||",
-			hl_group = "lualine_c_normal",
-		})
 
 		lualine.setup({
 			options = {
-				theme = "duskfox", --"tokyonight", --"monokai-pro", --"kanagawa" -- "onedark"
+				theme = "nordfox", --"duskfox", -- "pastelnight",  --"tokyonight", --"monokai-pro", --"kanagawa" -- "onedark"
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 			},
@@ -54,7 +34,7 @@ return {
 				},
 				lualine_c = {
 					{
-						symbols.get,
+						-- symbols.get,
 						-- cond = symbols.has,
 					},
 				},
@@ -68,9 +48,9 @@ return {
 					{
 						"fileformat",
 						symbols = {
+							mac = "", -- e711
 							unix = "", -- e712
 							-- dos = "", -- e70f
-							mac = "", -- e711
 						},
 					},
 					{ "filetype" },
