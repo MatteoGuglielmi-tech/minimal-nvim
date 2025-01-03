@@ -31,6 +31,14 @@ require("lazy").setup({
 		-- 		vim.cmd.colorscheme("tokyonight")
 		-- 	end,
 		-- },
+		-- {
+		-- 	"pauchiner/pastelnight.nvim",
+		-- 	lazy = false,
+		-- 	priority = 1000,
+		-- 	config = function()
+		-- 		vim.cmd("colorscheme pastelnight")
+		-- 	end,
+		-- },
 		{
 			"EdenEast/nightfox.nvim",
 			lazy = false,
