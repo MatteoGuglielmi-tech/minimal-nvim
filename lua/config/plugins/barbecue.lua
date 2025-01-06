@@ -9,8 +9,8 @@ return {
 	},
 	opts = {
 		symbols = {
-			-- separator = "",  -- nightfox do not like this sep, tokyonight does
-			separator = " ",
+			-- separator = "", -- nightfox do not like this sep, tokyonight does
+			separator = " ",
 		},
 	},
 	keys = {
@@ -22,15 +22,4 @@ return {
 			desc = "[B]arbecue [T]oggle",
 		},
 	},
-
-	-- config = function()
-	-- 	local paint = require("config.colors").getColorizedString
-	-- 	require("barbecue").setup({
-	-- 		symbols = {
-	-- 			-- separator = "",  -- nightfox do not like this sep, tokyonight does
-	-- 			-- separator = require("config.colors").getColorizedString(" ", "yellow"),
-	-- 			separator = paint(" ", "yellow"),
-	-- 		},
-	-- 	})
-	-- end,
 }

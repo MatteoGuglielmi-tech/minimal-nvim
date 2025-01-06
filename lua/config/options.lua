@@ -3,7 +3,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.opt.list = true
-vim.opt.listchars = { tab = "| ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "▏ ", trail = "·", nbsp = "␣" }
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = "yes:1"

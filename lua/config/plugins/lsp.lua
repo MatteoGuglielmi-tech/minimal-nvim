@@ -21,12 +21,11 @@ return {
 		servers = {
 			lua_ls = {},
 			bashls = { filetypes = { "sh", "zsh" } },
-
 			pyright = {},
-
 			marksman = {},
 			texlab = {},
-
+			zls = {}, -- zig
+			rust_analyzer = {}, -- rust
 			clangd = {
 				cmd = { "clangd" },
 				filetypes = { "c", "cpp" },
@@ -42,8 +41,6 @@ return {
 					})(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1]))
 				end,
 			},
-
-			rust_analyzer = {},
 		},
 	},
 
@@ -79,6 +76,34 @@ return {
 			-- bash
 			"shellcheck",
 		})
+
+		local icons = require("config.icons")
+
+		vim.diagnostic.config({
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+					[vim.diagnostic.severity.WARN] = icons.diagnostics.BoldWarning,
+					[vim.diagnostic.severity.HINT] = icons.diagnostics.BoldHint,
+					[vim.diagnostic.severity.INFO] = icons.diagnostics.BoldInformation,
+				},
+			},
+			virtual_text = true,
+			update_in_insert = false,
+			underline = true,
+			severity_sort = true,
+			float = {
+				focusable = true,
+				-- style = "minimal",
+				border = "rounded",
+				-- header = "",
+				-- prefix = "",
+				-- source = "always",
+			},
+		})
+
+		vim.lsp.buf.hover({ border = "rounded" })
+		vim.lsp.buf.signature_help({ border = "rounded" })
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 		require("mason-lspconfig").setup()
