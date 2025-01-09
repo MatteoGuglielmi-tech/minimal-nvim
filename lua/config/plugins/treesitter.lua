@@ -4,7 +4,6 @@ return {
 	-- "nvim-treesitter/nvim-treesitter-context",
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
-	build = ":TSUpdate",
 	config = function()
 		-- vim.cmd([[hi @function.builtin.lua guifg=pink ]])
 		require("nvim-treesitter.configs").setup({
