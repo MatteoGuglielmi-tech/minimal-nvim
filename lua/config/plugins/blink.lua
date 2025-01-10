@@ -1,6 +1,9 @@
 return {
 	"saghen/blink.cmp",
-	dependencies = { "rafamadriz/friendly-snippets", "echasnovski/mini.icons" },
+	dependencies = {
+		"rafamadriz/friendly-snippets",
+		"echasnovski/mini.icons",
+	},
 
 	version = "*",
 

@@ -12,6 +12,7 @@ return {
 			-- separator = "", -- nightfox do not like this sep, tokyonight does
 			separator = " ",
 		},
+		show_modified = true,
 	},
 	keys = {
 		{
