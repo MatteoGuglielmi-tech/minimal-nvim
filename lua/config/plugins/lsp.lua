@@ -28,18 +28,8 @@ return {
 			rust_analyzer = {}, -- rust
 			clangd = {
 				cmd = { "clangd" },
-				filetypes = { "c", "cpp" },
+				filetypes = { "c", "c~", "cpp" },
 				single_file_support = true,
-				root_dir = function(fname)
-					return require("lspconfig.util").root_pattern(unpack({
-						".clangd",
-						".clang-tidy",
-						".clang-format",
-						"compile_commands.json",
-						"compile_flags.txt",
-						"configure.ac",
-					})(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1]))
-				end,
 			},
 		},
 	},
