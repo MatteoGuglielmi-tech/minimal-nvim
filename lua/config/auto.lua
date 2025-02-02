@@ -114,14 +114,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("K", vim.lsp.buf.hover, "Hover Documentation")
 
 		---@diagnostic disable-next-line: missing-parameter, param-type-mismatch
-		if client.supports_method("textDocument/signatureHelp") then
-			vim.keymap.set(
-				{ "i", "v" },
-				"<C-/>",
-				vim.lsp.buf.signature_help,
-				{ buffer = event.buf, desc = "Signature help" }
-			)
-		end
+		-- if client.supports_method("textDocument/signatureHelp") then
+		-- 	vim.keymap.set(
+		-- 		{ "i", "v" },
+		-- 		"<C-/>",
+		-- 		vim.lsp.buf.signature_help,
+		-- 		{ buffer = event.buf, desc = "Signature help" }
+		-- 	)
+		-- end
 
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
