@@ -25,29 +25,6 @@ require("lazy").setup({
 	spec = {
 		{ "nvim-lua/plenary.nvim", priority = 1000 },
 		{ "tpope/vim-sleuth" },
-		-- {
-		-- 	"folke/tokyonight.nvim",
-		-- 	config = function()
-		-- 		vim.cmd.colorscheme("tokyonight")
-		-- 	end,
-		-- },
-		-- {
-		-- 	"pauchiner/pastelnight.nvim",
-		-- 	lazy = false,
-		-- 	priority = 1000,
-		-- 	config = function()
-		-- 		vim.cmd("colorscheme pastelnight")
-		-- 	end,
-		-- },
-		{
-			"EdenEast/nightfox.nvim",
-			lazy = false,
-			priority = 100,
-			config = function()
-				vim.cmd("colorscheme nordfox")
-				-- vim.cmd("colorscheme duskfox")
-			end,
-		},
 		{ import = "config.plugins" },
 	},
 	-- automatically check for plugin updates
