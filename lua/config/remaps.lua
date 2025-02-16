@@ -12,9 +12,9 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Window resizing
-vim.keymap.set("n", "<C-m>", "<cmd>resize -2<CR>", { desc = "Shrink window horizontally" })
-vim.keymap.set("n", "<C-,>", "<cmd>resize +2<CR>", { desc = "Wide window horizontally" })
-vim.keymap.set("n", "<C-.>", "<cmd>vertical resize -2<CR>", { desc = "Shrink window vertically" })
+vim.keymap.set("n", "M", "<cmd>resize -2<CR>", { desc = "Shrink window horizontally" })
+vim.keymap.set("n", "H", "<cmd>resize +2<CR>", { desc = "Wide window horizontally" })
+vim.keymap.set("n", "<C-m>", "<cmd>vertical resize -2<CR>", { desc = "Shrink window vertically" })
 vim.keymap.set("n", "<C-n>", "<cmd>vertical resize +2<CR>", { desc = "Wide window vertically" })
 
 -- Move lines up and down
