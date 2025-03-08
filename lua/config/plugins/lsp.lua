@@ -20,12 +20,12 @@ return {
 	opts = {
 		servers = {
 			lua_ls = {},
-			bashls = { filetypes = { "sh", "zsh" } },
+			bashls = { filetypes = { "sh" } },
 			pyright = {},
 			marksman = {},
 			texlab = {},
 			zls = {}, -- zig
-			rust_analyzer = {}, -- rust
+			-- rust_analyzer = {}, -- rust
 			clangd = {
 				cmd = { "clangd" },
 				filetypes = { "c", "c~", "cpp" },

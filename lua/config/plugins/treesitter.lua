@@ -12,6 +12,7 @@ return {
 				"python",
 				"c",
 				"zig",
+				"rust",
 				"bash",
 				"gitignore",
 				"markdown",

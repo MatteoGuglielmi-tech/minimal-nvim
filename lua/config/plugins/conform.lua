@@ -28,6 +28,7 @@ return {
 			-- bash = { "shfmt" },
 			yaml = { "yamlfix" },
 			markdown = { "cbfmt" },
+			rust = { "rustfmt", lsp_format = "fallback" },
 			["*"] = {},
 		},
 	},
