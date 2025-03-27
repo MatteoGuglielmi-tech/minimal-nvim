@@ -25,22 +25,17 @@ return {
 			marksman = {},
 			texlab = {},
 			zls = {}, -- zig
-			-- rust_analyzer = {}, -- rust
 			clangd = {
 				cmd = { "clangd" },
 				filetypes = { "c", "c~", "cpp" },
 				single_file_support = true,
 			},
 		},
-		-- setup = {
-		-- 	rust_analyzer = function()
-		-- 		return true
-		-- 	end,
-		-- },
 	},
 
 	config = function(_, opts)
 		local lspconfig = require("lspconfig")
+		local lspconfig_utils = require("config.lsp_utils")
 		require("mason").setup()
 
 		local ensure_installed = vim.tbl_keys(opts.servers or {})
@@ -99,6 +94,7 @@ return {
 
 		vim.lsp.buf.hover({ border = "rounded" })
 		vim.lsp.buf.signature_help({ border = "rounded" })
+		vim.lsp.handlers["textDocument/publishDiagnostics"] = lspconfig_utils.custom_on_publish_diagnostics
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 		require("mason-lspconfig").setup()
