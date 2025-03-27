@@ -18,7 +18,7 @@ return {
 					runner = "pytest",
 					python = (vim.fn.expand("$CONDA_PREFIX")) .. "/bin/python",
 				}),
-				require("rustaceanvim.neotest"),
+				-- require("rustaceanvim.neotest"),
 
 				vim.keymap.set("n", "<leader>rt", function()
 					require("neotest").run.run()

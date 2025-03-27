@@ -32,6 +32,11 @@ return {
 				single_file_support = true,
 			},
 		},
+		-- setup = {
+		-- 	rust_analyzer = function()
+		-- 		return true
+		-- 	end,
+		-- },
 	},
 
 	config = function(_, opts)

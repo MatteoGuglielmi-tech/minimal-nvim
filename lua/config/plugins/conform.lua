@@ -24,8 +24,6 @@ return {
 			lua = { "stylua" },
 			python = { "black", "isort", "docformatter" },
 			-- mojo = { "mojo_formatter" },
-			-- c = { "clang-format" },
-			-- bash = { "shfmt" },
 			yaml = { "yamlfix" },
 			markdown = { "cbfmt" },
 			rust = { "rustfmt", lsp_format = "fallback" },

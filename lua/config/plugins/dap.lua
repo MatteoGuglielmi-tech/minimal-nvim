@@ -22,7 +22,6 @@ return {
 			ensure_installed = {
 				-- debuggers
 				"python",
-				"codelldb",
 			},
 		})
 

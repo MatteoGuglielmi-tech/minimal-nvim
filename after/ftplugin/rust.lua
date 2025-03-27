@@ -1,5 +1,10 @@
+vim.opt_local.expandtab = true
+vim.opt_local.shiftwidth = 4
+vim.opt_local.softtabstop = 4
+vim.opt_local.formatoptions:append({ c = true, r = true, o = true, q = true })
+
 local bufnr = vim.api.nvim_get_current_buf()
-vim.keymap.set("n", "<leader>a", function()
+vim.keymap.set("n", "<leader>rca", function()
 	vim.cmd.RustLsp("codeAction")
 end, { silent = true, buffer = bufnr, desc = "[C]ode [A]ction for Rust" })
 
@@ -35,3 +40,7 @@ end, { silent = true, buffer = bufnr, desc = "[R]ust [J]ump to [R]elated Diagnos
 vim.keymap.set("n", "<leader>rjl", function()
 	vim.cmd.RustLsp("joinLines")
 end, { silent = true, buffer = bufnr, desc = "[R]ust [J]oin [L]ines" })
+
+vim.keymap.set("n", "<leader>rfc", function()
+	vim.cmd.RustLsp("flyCheck")
+end, { silent = true, buffer = bufnr, desc = "[R]ust [F]ly [C]heck" })
