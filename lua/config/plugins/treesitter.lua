@@ -1,96 +1,92 @@
--- everything in treesitter is "mapped" to a schema.
--- useful cmds: Inspect and InspectTree
+---@diagnostic disable: undefined-field, unused-local
+-- -- everything in treesitter is "mapped" to a schema.
+-- -- useful cmds: Inspect and InspectTree
 return {
-	-- "nvim-treesitter/nvim-treesitter-context",
-	"nvim-treesitter/nvim-treesitter-textobjects",
-	lazy = true,
-	dependencies = { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", event = { "BufReadPre", "BufNewFile" } },
-	config = function()
-		-- vim.cmd([[hi @function.builtin.lua guifg=pink ]])
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = {
-				"lua",
-				"python",
-				"c",
-				"zig",
-				"rust",
-				"bash",
-				"gitignore",
-				"markdown",
-				"markdown_inline",
-				"latex",
-				"yaml",
-				"json",
-				"vim",
-				"luadoc",
-				"vimdoc",
+	"nvim-treesitter/nvim-treesitter",
+	version = false,
+	build = ":TSUpdate",
+	event = { "BufReadPre", "BufNewFile" },
+	lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+	init = function(plugin)
+		require("nvim-treesitter.query_predicates")
+	end,
+
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-textobjects",
+	},
+
+	main = "nvim-treesitter.configs",
+
+	opts = {
+		highlight = {
+			enable = true,
+			disable = function(lang, buf)
+				local max_filesize = 100 * 1024 -- 100 KB
+				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+				if ok and stats and stats.size > max_filesize then
+					return true
+				end
+			end,
+			additional_vim_regex_highlighting = { "markdown", "markdown_inline" },
+		},
+		indent = { enable = true, disable = { "markdown", "markdown_inline" } },
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<C-space>",
+				node_incremental = "<C-space>",
+				scope_incremental = false,
+				node_decremental = "<bs>",
 			},
-			ignore_install = {},
-			modules = {},
-			sync_install = false,
-			auto_install = true,
-			highlight = {
+		},
+		textobjects = {
+			select = {
 				enable = true,
-				---@diagnostic disable-next-line: unused-local
-				disable = function(lang, buf)
-					local max_filesize = 100 * 1024 -- 100 KB
-					---@diagnostic disable-next-line: undefined-field
-					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-					if ok and stats and stats.size > max_filesize then
-						return true
-					end
-				end,
-				additional_vim_regex_highlighting = false,
-			},
-			indent = { enable = true },
 
-			textobjects = {
-				select = {
-					enable = true,
-					lookahead = true,
+				-- Automatically jump forward to textobj, similar to targets.vim
+				lookahead = true,
 
-					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
-						["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
-						["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
-						["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+				keymaps = {
+					-- You can use the capture groups defined in textobjects.scm
+					["a="] = { query = "@assignment.outer", { desc = "Select outer part of an assignment" } },
+					-- ["i="] = { query = "@assignment.inner", { desc = "Select inner part of an assignment" } },
+					["l="] = { query = "@assignment.lhs", { desc = "Select left hand side of an assignment" } },
+					["r="] = { query = "@assignment.rhs", { desc = "Select right hand side of an assignment" } },
 
-						["aa"] = { query = "@parameter.outer", desc = "Select outer part of a parameter/argument" },
-						["ia"] = { query = "@parameter.inner", desc = "Select inner part of a parameter/argument" },
+					["aa"] = { query = "@parameter.outer", { desc = "Select outer part of a parameter/argument" } },
+					["ia"] = { query = "@parameter.inner", { desc = "Select inner part of a parameter/argument" } },
 
-						["ai"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
-						["ii"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
+					["ai"] = { query = "@conditional.outer", { desc = "Select outer part of a conditional" } },
+					["ii"] = { query = "@conditional.inner", { desc = "Select inner part of a conditional" } },
 
-						["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
-						["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
+					["al"] = { query = "@loop.outer", { desc = "Select outer part of a loop" } },
+					["il"] = { query = "@loop.inner", { desc = "Select inner part of a loop" } },
 
-						["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
-						["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
+					["af"] = { query = "@call.outer", { desc = "Select outer part of a function call" } },
+					["if"] = { query = "@call.inner", { desc = "Select inner part of a function call" } },
 
-						["am"] = {
-							query = "@function.outer",
-							desc = "Select outer part of a method/function definition",
-						},
-						["im"] = {
-							query = "@function.inner",
-							desc = "Select inner part of a method/function definition",
-						},
-
-						["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
-						["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+					["am"] = {
+						query = "@function.outer",
+						{ desc = "Select outer part of a method/function definition" },
 					},
+					["im"] = {
+						query = "@function.inner",
+						{ desc = "Select inner part of a method/function definition" },
+					},
+
+					["ac"] = { query = "@class.outer", { desc = "Select outer part of a class" } },
+					["ic"] = { query = "@class.inner", { desc = "Select inner part of a class" } },
 				},
 
 				swap = {
 					enable = true,
 					swap_next = {
-						["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
-						["<leader>nm"] = "@function.outer", -- swap function with next
+						["<leader>si"] = "@parameter.inner", -- swap parameters/argument with next
+						["<leader>so"] = "@function.outer", -- swap function with next
 					},
 					swap_previous = {
-						["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
-						["<leader>pm"] = "@function.outer", -- swap function with previous
+						["<leader>pi"] = "@parameter.inner", -- swap parameters/argument with prev
+						["<leader>po"] = "@function.outer", -- swap function with previous
 					},
 				},
 
@@ -132,8 +128,6 @@ return {
 					},
 				},
 			},
-		})
-
-		-- require("treesitter-context").setup({ enable = true })
-	end,
+		},
+	},
 }
