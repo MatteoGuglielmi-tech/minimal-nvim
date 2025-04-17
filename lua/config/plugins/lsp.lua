@@ -12,19 +12,19 @@ return {
 		},
 		{ "saghen/blink.cmp" },
 		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" }, -- apparently this is needed to make things work
+		{ "williamboman/mason-lspconfig.nvim" },
 		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 		{ "j-hui/fidget.nvim", opts = {} },
 		{ "stevearc/dressing.nvim", opts = {}, dependencies = { "MunifTanjim/nui.nvim" } },
 	},
 	opts = {
 		servers = {
-			lua_ls = {},
+			lua_ls = { filetypes = { "lua" } },
 			bashls = { filetypes = { "sh" } },
-			pyright = {},
-			marksman = {},
-			texlab = {},
-			zls = {}, -- zig
+			pyright = { filetypes = { "python" } },
+			marksman = { filetypes = { "markdown", "markdown-inline" } },
+			texlab = { filetypes = { "latex" } },
+			zls = { filetypes = { "zig" } },
 			clangd = {
 				cmd = { "clangd" },
 				filetypes = { "c", "c~", "cpp" },
@@ -54,15 +54,13 @@ return {
 			-- yml
 			"yamlfix",
 			-- md
-			"cbfmt",
+			"prettier",
 
 			-- linters
 			-- c
 			"cpplint",
 			-- commit
 			"commitlint",
-			-- md
-			"markdownlint",
 			-- bash
 			"shellcheck",
 		})
