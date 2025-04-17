@@ -1,15 +1,15 @@
 return {
 	"stevearc/conform.nvim",
-	lazy = false,
+	event = { "BufReadPre", "BufNewFile" },
 	keys = {
-		-- {
-		-- 	"<leader>f",
-		-- 	function()
-		-- 		require("conform").format({ async = true, lsp_fallback = true })
-		-- 	end,
-		-- 	mode = "n",
-		-- 	desc = "[F]ormat buffer",
-		-- },
+		{
+			"<leader>f",
+			function()
+				require("conform").format({ async = true, lsp_fallback = true })
+			end,
+			mode = "n",
+			desc = "[F]ormat buffer",
+		},
 	},
 	opts = {
 		notify_on_error = true,
@@ -20,12 +20,13 @@ return {
 				lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
 			}
 		end,
+
 		formatters_by_ft = {
 			lua = { "stylua" },
 			python = { "black", "isort", "docformatter" },
-			-- mojo = { "mojo_formatter" },
+			mojo = { "mojo_formatter" },
 			yaml = { "yamlfix" },
-			markdown = { "cbfmt" },
+			markdown = { "prettier" },
 			rust = { "rustfmt", lsp_format = "fallback" },
 			["*"] = {},
 		},
