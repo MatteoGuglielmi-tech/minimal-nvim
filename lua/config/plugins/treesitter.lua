@@ -14,6 +14,7 @@ return {
 
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		"nvim-treesitter/nvim-treesitter-context",
 	},
 
 	main = "nvim-treesitter.configs",
@@ -130,6 +131,13 @@ return {
 					},
 				},
 			},
+		},
+
+		context = {
+			enable = true,
+			line_numbers = true,
+			multiline_threshold = 20,
+			separator = nil,
 		},
 	},
 }
