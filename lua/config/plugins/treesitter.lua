@@ -3,11 +3,9 @@
 -- -- useful cmds: Inspect and InspectTree
 return {
 	"nvim-treesitter/nvim-treesitter",
-	version = false,
+	branch = "master",
+	lazy = false,
 	build = ":TSUpdate",
-	event = { "BufReadPre", "BufNewFile" },
-	-- load treesitter early when opening a file from the cmdline
-	lazy = vim.fn.argc(-1) == 0,
 	init = function(plugin)
 		require("nvim-treesitter.query_predicates")
 	end,
