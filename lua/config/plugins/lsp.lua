@@ -1,3 +1,5 @@
+local lspconfig_utils = require("config.lsp_utils.lsp_utils")
+
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
@@ -20,8 +22,18 @@ return {
 	opts = {
 		servers = {
 			lua_ls = { filetypes = { "lua" } },
+			pyright = {
+				filetypes = { "python" },
+				before_init = function(_, config)
+					local python_path = lspconfig_utils.get_conda_python_path()
+					if python_path then
+						config.settings = config.settings or {}
+						config.settings.python = config.settings.python or {}
+						config.settings.python.pythonPath = python_path
+					end
+				end,
+			},
 			bashls = { filetypes = { "sh" } },
-			pyright = { filetypes = { "python" } },
 			marksman = { filetypes = { "markdown", "markdown-inline" } },
 			texlab = { filetypes = { "latex" } },
 			zls = { filetypes = { "zig" } },
@@ -35,7 +47,6 @@ return {
 
 	config = function(_, opts)
 		local lspconfig = require("lspconfig")
-		local lspconfig_utils = require("config.lsp_utils")
 		require("mason").setup()
 
 		local ensure_installed = vim.tbl_keys(opts.servers or {})
@@ -94,12 +105,16 @@ return {
 		vim.lsp.buf.signature_help({ border = "rounded" })
 		vim.lsp.handlers["textDocument/publishDiagnostics"] = lspconfig_utils.custom_on_publish_diagnostics
 
-		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-		require("mason-lspconfig").setup()
+		require("mason-tool-installer").setup({
+			ensure_installed = ensure_installed,
+			auto_update = true,
+			run_on_start = true,
+		})
 
 		for server, config in pairs(opts.servers) do
 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 			lspconfig[server].setup(config)
 		end
+
 	end,
 }
