@@ -28,16 +28,18 @@ return {
 		---@diagnostic disable-next-line: missing-fields
 		require("nvim-dap-virtual-text").setup({})
 
-		local map = function(obj, icon, thl, lhl, nhl)
-			vim.fn.sign_define(obj, { text = icon, texthl = thl, linehl = lhl, numhl = nhl })
-		end
-		map("DapBreakpoint", "", "Error", "", "")
-		map("DapBreakpointRejected", "", "DiagnosticsSignError", "", "DiagnosticsSignError")
-		map("DapStopped", "", "DiagnosticSignWarn", "Visual", "DiagnosticSignWarn")
-
-		local cond_breakpoint = function()
-			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end
+		-- Set pretty signs for nvim-dap
+		vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "Error", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "🤔", texthl = "", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapLogPoint", { text = "💬", texthl = "", linehl = "", numhl = "" })
+		vim.fn.sign_define(
+			"DapStopped",
+			{ text = "▶️", texthl = "DiagnosticSignWarn", linehl = "Visual", numhl = "DiagnosticSignWarn" }
+		)
+		vim.fn.sign_define(
+			"DapBreakpointRejected",
+			{ text = "❌", texthl = "DiagnosticsSignError", linehl = "", numhl = "DiagnosticsSignError" }
+		)
 
 		local dap_ui_hover = function()
 			dap.ui.widgets.hover()
