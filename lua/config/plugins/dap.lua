@@ -59,15 +59,30 @@ return {
 		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Debug: Step Out" })
 
 		vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-		vim.keymap.set("n", "<leader>dB", cond_breakpoint, { desc = "Debug: Set Breakpoint" })
-		vim.keymap.set("n", "<leader>de", dap_ui_eval, { desc = "Evaluate Input" })
 
-		vim.keymap.set("n", "<leader>dD", dap.disconnect, { desc = "Debug : Disconnect" })
+		vim.keymap.set("n", "<leader>db", function()
+			local condition = vim.fn.input("Breakpoint Condition: ")
+			require("dap").set_breakpoint(condition)
+		end, { desc = "Debug: Set Breakpoint with condition" })
+
+		-- Set a keymap for creating a DAP logpoint
+		vim.keymap.set("n", "<leader>bl", function()
+			-- Prompt the user for the message to log
+			local log_message = vim.fn.input("Log Message: ")
+			-- Ensure the user entered a message before setting the logpoint
+			if log_message ~= "" then
+				require("dap").set_breakpoint(nil, nil, log_message)
+			end
+		end, { desc = "DAP: Set Log Point" })
+
+		vim.keymap.set("n", "<leader>de", dap_ui_eval, { desc = "Debug: Evaluate Input" })
+
+		vim.keymap.set("n", "<leader>dD", dap.disconnect, { desc = "Debug: Disconnect" })
 		vim.keymap.set("n", "<leader>di", dap.step_back, { desc = "Debug: Step Back" })
 
 		dapui.setup(dapuiconfig)
 
-		vim.keymap.set("n", "<leader>dK", dap_ui_hover, { desc = "Debug : Info expression under cursor" })
+		vim.keymap.set("n", "<leader>dK", dap_ui_hover, { desc = "Debug: Info expression under cursor" })
 		vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "Debug: See last session result." })
 
 		dap.listeners.before.attach.dapui_config = function()
