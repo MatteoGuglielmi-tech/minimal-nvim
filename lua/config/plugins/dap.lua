@@ -29,9 +29,13 @@ return {
 		require("nvim-dap-virtual-text").setup({})
 
 		-- Set pretty signs for nvim-dap
-		vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "Error", linehl = "", numhl = "" })
-		vim.fn.sign_define("DapBreakpointCondition", { text = "🤔", texthl = "", linehl = "", numhl = "" })
-		vim.fn.sign_define("DapLogPoint", { text = "💬", texthl = "", linehl = "", numhl = "" })
+
+		-- "🛑", "🚨", "🚫", "📌",  "📍"
+		vim.fn.sign_define("DapBreakpoint", { text = "⛔", texthl = "Error", linehl = "", numhl = "" })
+		-- "🤔", "🔎", 
+		vim.fn.sign_define("DapBreakpointCondition", { text = "⁉️", texthl = "", linehl = "", numhl = "" })
+		-- "💬"
+		vim.fn.sign_define("DapLogPoint", { text =  "📢", texthl = "", linehl = "", numhl = "" })
 		vim.fn.sign_define(
 			"DapStopped",
 			{ text = "▶️", texthl = "DiagnosticSignWarn", linehl = "Visual", numhl = "DiagnosticSignWarn" }
@@ -51,21 +55,21 @@ return {
 
 		dap.set_log_level("info")
 
-		vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
-		vim.keymap.set("n", "<S-F5>", dap.restart, { desc = "Debug: ReStart" })
-		vim.keymap.set("n", "<C-F5>", dap.terminate, { desc = "Debug : Terminate" })
-		vim.keymap.set("n", "<C-M-F5>", dap.close, { desc = "Debug : Close" })
-		vim.keymap.set("n", "<F6>", dap.run_to_cursor, { desc = "Run to cursor" })
-		vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Debug: Step Over" })
-		vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Debug: Step Into" })
-		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Debug: Step Out" })
+		vim.keymap.set("n", "<F5>", dap.continue, { desc = "DAP: Start/Continue" })
+		vim.keymap.set("n", "<S-F5>", dap.restart, { desc = "DAP: ReStart" })
+		vim.keymap.set("n", "<C-F5>", dap.terminate, { desc = "DAP : Terminate" })
+		-- vim.keymap.set("n", "<C-M-F5>", dap.close, { desc = "DAP : Close" })
+		vim.keymap.set("n", "<F6>", dap.run_to_cursor, { desc = "DAP: Run to cursor" })
+		vim.keymap.set("n", "<F10>", dap.step_over, { desc = "DAP: Step Over" })
+		vim.keymap.set("n", "<F11>", dap.step_into, { desc = "DAP: Step Into" })
+		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "DAP: Step Out" })
 
-		vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+		vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
 
 		vim.keymap.set("n", "<leader>db", function()
 			local condition = vim.fn.input("Breakpoint Condition: ")
 			require("dap").set_breakpoint(condition)
-		end, { desc = "Debug: Set Breakpoint with condition" })
+		end, { desc = "DAP: Set Breakpoint with condition" })
 
 		-- Set a keymap for creating a DAP logpoint
 		vim.keymap.set("n", "<leader>bl", function()
@@ -77,15 +81,15 @@ return {
 			end
 		end, { desc = "DAP: Set Log Point" })
 
-		vim.keymap.set("n", "<leader>de", dap_ui_eval, { desc = "Debug: Evaluate Input" })
+		vim.keymap.set("n", "<leader>de", dap_ui_eval, { desc = "DAP: Evaluate Input" })
 
-		vim.keymap.set("n", "<leader>dD", dap.disconnect, { desc = "Debug: Disconnect" })
-		vim.keymap.set("n", "<leader>di", dap.step_back, { desc = "Debug: Step Back" })
+		vim.keymap.set("n", "<leader>dD", dap.disconnect, { desc = "DAP: Disconnect" })
+		vim.keymap.set("n", "<leader>di", dap.step_back, { desc = "DAP: Step Back" })
 
 		dapui.setup(dapuiconfig)
 
-		vim.keymap.set("n", "<leader>dK", dap_ui_hover, { desc = "Debug: Info expression under cursor" })
-		vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "Debug: See last session result." })
+		vim.keymap.set("n", "<leader>dK", dap_ui_hover, { desc = "DAP: Info expression under cursor" })
+		vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "DAP: See last session result." })
 
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
