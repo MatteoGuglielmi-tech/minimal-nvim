@@ -78,69 +78,54 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			return
 		end
 
+		-- Jump among diagnostics ---
 		map("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Previous diagnostic")
 		map("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic")
+		map("<leader>td", "<cmd>Trouble diagnostics<CR>", "[T]rouble: [D]ocument Diagnostic")
+		map("<leader>tb", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", "[T]rouble: [B]uffer Diagnostics")
+		--------------------------
 
+		-- Jump around ---
 		--  To jump back, press <C-t>.
-		map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]definition")
-		map("<leader>tr", "<cmd>Trouble lsp_references<CR>", "[T]rouble [R]eferences")
-		-- map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-		map("<leader>ti", "<cmd>Trouble lsp_implementations<CR>", "[T]rouble [I]mplementation")
-		-- map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+		map("gd", require("telescope.builtin").lsp_definitions, "Telescope: [G]oto [D]definition")
+		map("<leader>tr", "<cmd>Trouble lsp_references<CR>", "[T]rouble: [R]eferences")
+		map("<leader>ti", "<cmd>Trouble lsp_implementations<CR>", "[T]rouble: [I]mplementation")
+		-- map("gr", require("telescope.builtin").lsp_references, "Telescope: [G]oto [R]eferences")
+		-- map("<leader>ti", require("telescope.builtin").lsp_implementations, "[T]elescope: [I]mplementations")
+		--------------------------
 
-		-- Jump to the type of the word under your cursor.
-		--  Useful when you're not sure what type a variable is and you want to see
-		--  the definition of its *type*, not where it was *defined*.
-		map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]definition")
-
-		-- Fuzzy find all the symbols in your current document.
-		--  Symbols are things like variables, functions, types, etc.
-		map("<leader>ls", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]symbols")
-
-		-- Fuzzy find all the symbols in your current workspace.
-		--  Similar to document symbols, except searches over your entire project.
+		-- Fuzzy find symbols ---
+		map("<leader>bs", require("telescope.builtin").lsp_document_symbols, "Telescope: [B]uffer [S]symbols")
 		map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]symbols")
+		--------------------------
 
-		map("<leader>td", "<cmd>Trouble diagnostics<CR>", "[T]rouble [D]ocument Diagnostic")
-		map("<leader>tc", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", "Buffer Diagnostics (Trouble)")
+		-- Rename all occurences of word under cursor ---
+		map("<leader>rn", vim.lsp.buf.rename, "LSP: [R]e[n]ame")
+		--------------------------
 
-		map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-
+		-- Check code actions proposed by lsp ---
 		---@diagnostic disable-next-line: missing-parameter, param-type-mismatch
 		if client.supports_method("textDocument/codeAction") then
-			map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+			map("<leader>ca", vim.lsp.buf.code_action, "LSP: [C]ode [A]ction")
 		end
+		--------------------------
 
-		map("K", vim.lsp.buf.hover, "Hover Documentation")
+		-- Check documentation for symbol under cursor ---
+		map("K", vim.lsp.buf.hover, "LSP: Hover Documentation")
+		--------------------------
 
-		---@diagnostic disable-next-line: missing-parameter, param-type-mismatch
-		-- if client.supports_method("textDocument/signatureHelp") then
-		-- 	vim.keymap.set(
-		-- 		{ "i", "v" },
-		-- 		"<C-/>",
-		-- 		vim.lsp.buf.signature_help,
-		-- 		{ buffer = event.buf, desc = "Signature help" }
-		-- 	)
-		-- end
+		-- map("gD", vim.lsp.buf.declaration, "LSP: [G]oto [D]eclaration")
 
-		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-
-		-- if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-		-- 	map("<leader>th", function()
-		-- 		---@diagnostic disable-next-line: missing-parameter
-		-- 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), nil)
-		-- 	end, { desc = "[T]oggle Inlay [H]ints" } )
-		-- end
-
+		-- Ghost hints ---
 		local bufnr = event.buf
-    -- Keymap to toggle inlay hints, buffer-local to where LSP is attached.
-    -- A good keymap is <leader>th (toggle hints)
-    vim.keymap.set('n', '<leader>th', function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-    end, { buffer = bufnr, desc = "LSP: [T]oggle Inlay [H]ints" })
+		vim.keymap.set("n", "<leader>th", function()
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+		end, { buffer = bufnr, desc = "LSP: [T]oggle Inlay [H]ints" })
 
-    -- enable inlay hints automatically when the LSP attaches
-    vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
+		-- enable inlay hints automatically when the LSP attaches
+		vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
+		--------------------------
+
 	end,
 })
 
