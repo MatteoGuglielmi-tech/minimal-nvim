@@ -125,12 +125,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-		if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-			map("<leader>th", function()
-				---@diagnostic disable-next-line: missing-parameter
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-			end, "[T]oggle Inlay [H]ints")
-		end
+		-- if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+		-- 	map("<leader>th", function()
+		-- 		---@diagnostic disable-next-line: missing-parameter
+		-- 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), nil)
+		-- 	end, { desc = "[T]oggle Inlay [H]ints" } )
+		-- end
+
+		local bufnr = event.buf
+    -- Keymap to toggle inlay hints, buffer-local to where LSP is attached.
+    -- A good keymap is <leader>th (toggle hints)
+    vim.keymap.set('n', '<leader>th', function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end, { buffer = bufnr, desc = "LSP: [T]oggle Inlay [H]ints" })
+
+    -- enable inlay hints automatically when the LSP attaches
+    vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
 	end,
 })
 

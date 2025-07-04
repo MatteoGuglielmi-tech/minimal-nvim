@@ -21,7 +21,17 @@ return {
 	},
 	opts = {
 		servers = {
-			lua_ls = { filetypes = { "lua" } },
+			-- Lua
+			lua_ls = {
+				settings = {
+					Lua = {
+						hint = { enable = true },
+						telemetry = { enable = false },
+						workspace = { checkThirdParty = false },
+					},
+				},
+			},
+			-- Python
 			pyright = {
 				filetypes = { "python" },
 				before_init = function(_, config)
@@ -32,15 +42,45 @@ return {
 						config.settings.python.pythonPath = python_path
 					end
 				end,
+				settings = {
+					python = {
+						analysis = {
+							inlayHints = {
+								variableTypes = true,
+								functionReturnTypes = true,
+							},
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
+						},
+					},
+				},
 			},
+			-- Bash
 			bashls = { filetypes = { "sh" } },
+			-- Markdown
 			marksman = { filetypes = { "markdown", "markdown-inline" } },
+			-- LaTeX
 			texlab = { filetypes = { "latex" } },
-			zls = { filetypes = { "zig" } },
+			-- zig
+			zls = {
+				filetypes = { "zig" },
+				settings = { zls = { enable_inlay_hints = true } },
+			},
+			-- C
 			clangd = {
 				cmd = { "clangd" },
 				filetypes = { "c", "c~", "cpp" },
 				single_file_support = true,
+				settings = {
+					clangd = {
+						InlayHints = {
+							-- Show hints for parameter names
+							ParameterNames = true,
+							-- Show hints for automatically deduced types
+							DeducedTypes = true,
+						},
+					},
+				},
 			},
 		},
 	},
@@ -115,6 +155,5 @@ return {
 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 			lspconfig[server].setup(config)
 		end
-
 	end,
 }
