@@ -8,7 +8,7 @@ return {
 
 		lualine.setup({
 			options = {
-				theme = "vague", --"nordfox", --"duskfox", -- "pastelnight",  --"tokyonight", --"monokai-pro", --"kanagawa" -- "onedark"
+				theme = "vague", --"rose-pine",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 			},
