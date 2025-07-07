@@ -81,7 +81,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Jump among diagnostics ---
 		map("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Previous diagnostic")
 		map("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic")
-		map("<leader>td", "<cmd>Trouble diagnostics<CR>", "[T]rouble: [D]ocument Diagnostic")
+		map("<leader>tw", "<cmd>Trouble diagnostics<CR>", "[T]rouble: [W]orkspace Diagnostic")
 		map("<leader>tb", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", "[T]rouble: [B]uffer Diagnostics")
 		--------------------------
 
@@ -90,13 +90,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("gd", require("telescope.builtin").lsp_definitions, "Telescope: [G]oto [D]definition")
 		map("<leader>tr", "<cmd>Trouble lsp_references<CR>", "[T]rouble: [R]eferences")
 		map("<leader>ti", "<cmd>Trouble lsp_implementations<CR>", "[T]rouble: [I]mplementation")
-		-- map("gr", require("telescope.builtin").lsp_references, "Telescope: [G]oto [R]eferences")
+		map("<leader>gr", require("telescope.builtin").lsp_references, "Telescope: [G]oto [R]eferences")
 		-- map("<leader>ti", require("telescope.builtin").lsp_implementations, "[T]elescope: [I]mplementations")
 		--------------------------
 
 		-- Fuzzy find symbols ---
 		map("<leader>bs", require("telescope.builtin").lsp_document_symbols, "Telescope: [B]uffer [S]symbols")
-		map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]symbols")
+		map(
+			"<leader>ws",
+			require("telescope.builtin").lsp_dynamic_workspace_symbols,
+			"Telescope: [W]orkspace [S]symbols"
+		)
 		--------------------------
 
 		-- Rename all occurences of word under cursor ---
@@ -125,7 +129,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- enable inlay hints automatically when the LSP attaches
 		vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
 		--------------------------
-
 	end,
 })
 
