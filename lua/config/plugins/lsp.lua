@@ -92,8 +92,8 @@ return {
 			"stylua",
 			-- python
 			"black",
-			"isort",
-			"docformatter",
+			-- "isort",
+			-- "docformatter",
 			-- c
 			"clang-format",
 			-- bash
