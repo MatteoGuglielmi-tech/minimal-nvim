@@ -5,6 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		{ "nvim-telescope/telescope-ui-select.nvim" },
+		{ "nvim-telescope/telescope-dap.nvim" },
 		{ "echasnovski/mini.icons" },
 		-- { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 	},
@@ -30,14 +31,14 @@ return {
 			},
 			extensions = {
 				fzf = {},
-				["ui-select"] = {
-					require("telescope.themes").get_ivy(),
-				},
+				-- dap = { require("telescope.themes").get_ivy() },
+				["ui-select"] = { theme = "ivy" },
 			},
 		})
 		pcall(require("telescope").load_extension, "fzf")
 		pcall(require("telescope").load_extension, "ui-select")
 		pcall(require("telescope").load_extension, "bookmarks")
+		pcall(require("telescope").load_extension, "dap")
 
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
@@ -69,7 +70,5 @@ return {
 		vim.keymap.set("n", "<leader>fn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config"), prompt_title = "Search Neovim config" })
 		end, { desc = "[F]ind [N]eovim files" })
-
-		require("config.telescope.multigrep").setup()
 	end,
 }
