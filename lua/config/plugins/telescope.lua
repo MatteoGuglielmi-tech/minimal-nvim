@@ -31,7 +31,6 @@ return {
 			},
 			extensions = {
 				fzf = {},
-				-- dap = { require("telescope.themes").get_ivy() },
 				["ui-select"] = { theme = "ivy" },
 			},
 		})
@@ -70,5 +69,8 @@ return {
 		vim.keymap.set("n", "<leader>fn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config"), prompt_title = "Search Neovim config" })
 		end, { desc = "[F]ind [N]eovim files" })
+
+
+		require("config.telescope.multigrep").setup()
 	end,
 }
