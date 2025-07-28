@@ -31,7 +31,7 @@ return {
 		end, { desc = "[N]eotest: run the current [f]ile" })
 
 		vim.keymap.set("n", "<leader>nd", function()
-			require("neotest").run.run({strategy = "dap", suite=true })
+			require("neotest").run.run({strategy = "dap", suite=false})
 		end, { desc = "[N]eotest: [d]ebug the nearest test" })
 
 		vim.keymap.set("n", "<leader>ns", function()

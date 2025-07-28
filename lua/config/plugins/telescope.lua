@@ -70,7 +70,6 @@ return {
 			builtin.find_files({ cwd = vim.fn.stdpath("config"), prompt_title = "Search Neovim config" })
 		end, { desc = "[F]ind [N]eovim files" })
 
-
 		require("config.telescope.multigrep").setup()
 	end,
 }
