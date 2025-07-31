@@ -127,7 +127,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, { buffer = bufnr, desc = "LSP: [T]oggle Inlay [H]ints" })
 
 		-- enable inlay hints automatically when the LSP attaches
-		vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
+		-- vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
 		--------------------------
 	end,
 })
