@@ -1,35 +1,25 @@
--- INFO: in the following, default mappings:
 -- `ds` - delete a surrounding
 -- `cs` - change a surrounding
--- `ys` - add a surrounding
--- `yS` - add a surrounding and place the surrounded text on a new line + indent insert
--- `yss` - add a surrounding to the whole visual_line
--- `ySs` - add a surrounding to the whole visual_block
--- `ySS` - same as `ySs`
-
--- INFO: examples of usage with 'Hello world' string:
--- 'iw' - inner word --> ("ysiw]" with cursor on 'Hello') 'Hello world!' --> '[Hello] world'
--- "yss)" - surround whole line with brackets --> 'Hello world!' --> '(Hello world!)'
+-- `ys` - add a surrounding ( needs an action afterwards )
+-- `yss` - add a surrounding to the current line
+-- `ySS` - add a surrounding and place the surrounded text on a new line
 
 return {
 	"kylechui/nvim-surround",
+	version = "^3.0.0",
 	event = "VeryLazy",
 	config = function()
 		require("nvim-surround").setup({
-			keymaps = { -- vim-surround style keymaps
-				insert = "<C-g>s",
-				insert_line = "<C-g>S",
-				normal = "s",
-				normal_cur = "ss",
-				normal_line = "S",
-				normal_cur_line = "SS",
+			-- general rule is that if the key ends in "_line", the delimiter pair is added on new lines.
+			-- If the key ends in "_cur", the surround is performed around the current line.
+			keymaps = {
+				normal = "ys",
+				normal_cur = "yss",
 				visual = "s",
-				visual_line = "gS",
 				delete = "ds",
 				change = "cs",
 			},
 		})
 
-		vim.cmd([[nmap <leader>' siw']])
 	end,
 }
