@@ -3,3 +3,5 @@ lua/lualine/
 .DS_STORE
 lua/.DS_STORE
 *.json
+
+lua/config/floating_term/
