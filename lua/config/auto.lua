@@ -147,3 +147,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 		require("lint").try_lint()
 	end,
 })
+
+vim.api.nvim_create_autocmd({ "TermEnter" }, {
+  pattern = { "*" },
+  callback = function()
+		vim.cmd("startinsert")
+  end,
+})
