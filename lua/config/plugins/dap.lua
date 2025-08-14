@@ -2,29 +2,12 @@ return {
 	"rcarriga/nvim-dap-ui",
 	dependencies = {
 		"nvim-neotest/nvim-nio",
-		{
-			"jay-babu/mason-nvim-dap.nvim",
-			dependencies = {
-				"williamboman/mason.nvim",
-				"mfussenegger/nvim-dap",
-			},
-		},
 		"theHamsta/nvim-dap-virtual-text",
 	},
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
 		local dapuiconfig = require("config.dapuiconf").config()
-
-		require("mason-nvim-dap").setup({
-			automatic_installation = true,
-			handlers = {},
-			ensure_installed = {
-				-- debuggers
-				"python",
-				"codelldb",
-			},
-		})
 
 		---@diagnostic disable-next-line: missing-fields
 		require("nvim-dap-virtual-text").setup({})
