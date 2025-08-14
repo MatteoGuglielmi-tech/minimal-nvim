@@ -1,13 +1,6 @@
-
 return {
 	"mfussenegger/nvim-dap-python",
 	dependencies = { "mfussenegger/nvim-dap" },
-	-- config = function()
-	-- 	pcall(function()
-	-- 		local python_path = lspconfig_utils.get_conda_python_path()
-	-- 		require("dap-python").setup(python_path)
-	-- 	end)
-	-- end,
 	config = function ()
 		local lspconfig_utils = require("config.lsp_utils.lsp_utils")
 		local python_path = lspconfig_utils.get_conda_python_path()

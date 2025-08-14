@@ -38,6 +38,11 @@ end
 function M.get_conda_python_path()
 	-- conda prefix changes based on active environment
 	local conda_prefix = vim.fn.expand("$CONDA_PREFIX")
+ 
+	if conda_prefix == nil or conda_prefix == "" then
+		return nil
+	end
+
 	if conda_prefix then
 		return conda_prefix .. "/bin/python"
 	end
