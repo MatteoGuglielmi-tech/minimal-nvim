@@ -15,7 +15,7 @@ return {
 			keymaps = {
 				normal = "ys",
 				normal_cur = "yss",
-				visual = "s",
+				visual = "w",
 				delete = "ds",
 				change = "cs",
 			},
