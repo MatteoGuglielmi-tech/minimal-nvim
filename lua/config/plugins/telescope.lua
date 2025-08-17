@@ -51,10 +51,25 @@ return {
 		vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 
+		local sorters = require("telescope.sorters")
 		vim.keymap.set(
 			"n",
 			"<leader>fc",
-			builtin.current_buffer_fuzzy_find,
+			function ()
+				local custom_sorter = sorters.get_generic_fuzzy_sorter()
+				custom_sorter.compare = function(self, entry_a, entry_b, prompt)
+					local score_a = self.scoring_function(self, entry_a, prompt)
+					local score_b = self.scoring_function(self, entry_b, prompt)
+
+					if score_a ~= score_b then
+						return score_a > score_b
+					end
+
+					return (entry_a.lnum or 0) < (entry_b.lnum or 0)
+				end
+
+				builtin.current_buffer_fuzzy_find({ sorter = custom_sorter })
+			end,
 			{ desc = "[F]uzzily search in [C]urrent buffer" }
 		)
 
