@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"echasnovski/mini.icons",
+		"moyiz/blink-emoji.nvim",
 	},
 
 	version = "*",
@@ -23,17 +24,27 @@ return {
 			nerd_font_variant = "mono",
 		},
 		signature = { enabled = true },
-
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
-			-- disable blink completion on cmdline
-			-- cmdline = {},
+			default = { "lsp", "path", "snippets", "buffer", "emoji"},
+			providers = {
+				emoji = {
+					module = "blink-emoji",
+					name = "Emoji",
+					score_offset = 15,
+					opts = {
+						insert = true,
+						---@type string|table|fun():table
+						trigger = function()
+							return { ":" }
+						end,
+					},
+				},
+			},
 		},
 
 		-- non-default opts
 		completion = {
 			accept = { auto_brackets = { enabled = true } },
-
 			menu = {
 				auto_show = true,
 				draw = {
