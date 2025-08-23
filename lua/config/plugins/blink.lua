@@ -4,7 +4,7 @@ return {
 		"rafamadriz/friendly-snippets",
 		"echasnovski/mini.icons",
 		"moyiz/blink-emoji.nvim",
-		"milanglacier/minuet-ai.nvim",
+		-- "milanglacier/minuet-ai.nvim",
 	},
 	version = "1.*",
 	opts = {
@@ -50,7 +50,7 @@ return {
 		-- non-default opts
 		completion = {
 			accept = { auto_brackets = { enabled = true } },
-			trigger = { prefetch_on_insert = false },
+			-- trigger = { prefetch_on_insert = false },
 			menu = {
 				auto_show = true,
 				draw = {
