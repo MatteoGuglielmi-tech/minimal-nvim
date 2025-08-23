@@ -57,9 +57,6 @@ vim.keymap.set("n", "<space>nm", function ()
   vim.keymap.set('n', 'q', '<cmd>close!<CR>', { silent = true, buffer = buf })
 end, { desc = "Show [N]eovim [m]essage history in floating window" })
 
-
-
-
 vim.keymap.set("n", "<space>em", function()
   local errmsg = vim.v.errmsg
 
@@ -94,7 +91,6 @@ vim.keymap.set("n", "<space>em", function()
     vim.notify("No error message to display.", vim.log.levels.INFO)
   end
 end, { desc = "Show [e]rror [m]essage in floating window" })
-
 
 -- yanking
 vim.keymap.set("n", "P", '"0p', { desc = "Yank from register 0" })
