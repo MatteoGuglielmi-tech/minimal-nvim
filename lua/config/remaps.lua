@@ -29,11 +29,6 @@ vim.keymap.set("n", "#", "#zz", { desc = "Find previous occurrence of word under
 vim.keymap.set("n", "g*", "g*zz", { desc = "Find next occurrences of selected char" })
 vim.keymap.set("n", "g#", "g#zz", { desc = "Find previous occurrence of selected char" })
 
--- visualize messages by nvim
-vim.keymap.set("c", "mes", "<cmd>messages<CR><esc>", { desc = "Shows messages by neovim" })
-vim.keymap.set("c", "emes", "<esc><cmd>echo v:errmsg<CR>", { desc = "Shows error messages by neovim" })
-vim.keymap.set("c", "w!!", "<cmd>w !sudo tee > /dev/null %<CR><esc>", { desc = "Write file with sudo priviledges" })
-
 -- yanking
 vim.keymap.set("n", "P", '"0p', { desc = "Yank from register 0" })
 vim.keymap.set("n", "P1", '"1p', { desc = "Yank from register 1" })
@@ -41,7 +36,6 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Yank on black hole register
 --this requires either xclip or xsel to be installed
 vim.keymap.set("v", "<leader>y", [["+y]], { desc = "Copy content to clipboard" })
 
--- keymap('c', 'w!!', "<esc>:lua require'user.sudo'.sudo_write()<CR>", { silent = true })
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make split windows the same dimensions" })
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split buffer vertically" })
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split buffer horizontally" })
