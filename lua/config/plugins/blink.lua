@@ -4,12 +4,10 @@ return {
 		"rafamadriz/friendly-snippets",
 		"echasnovski/mini.icons",
 		"moyiz/blink-emoji.nvim",
+		"milanglacier/minuet-ai.nvim",
 	},
-
-	version = "*",
-
+	version = "1.*",
 	opts = {
-		-- default opts
 		keymap = {
 			preset = "default",
 			["<C-f>"] = { "snippet_forward", "fallback" },
@@ -25,7 +23,7 @@ return {
 		},
 		signature = { enabled = true },
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "emoji"},
+			default = { "lsp", "path", "snippets", "buffer", "emoji" },
 			providers = {
 				emoji = {
 					module = "blink-emoji",
@@ -39,19 +37,23 @@ return {
 						end,
 					},
 				},
+				minuet = {
+					name = "minuet",
+					module = "minuet.blink",
+					async = true,
+					timeout_ms = 3000,
+					score_offset = 50,
+				},
 			},
 		},
 
 		-- non-default opts
 		completion = {
 			accept = { auto_brackets = { enabled = true } },
+			trigger = { prefetch_on_insert = false },
 			menu = {
 				auto_show = true,
 				draw = {
-					-- 	columns = {
-					-- 		{ "label", "label_description", gap = 1 },
-					-- 		{ "kind_icon", "kind" },
-					-- 	},
 					components = {
 						kind_icon = {
 							ellipsis = false,
@@ -73,6 +75,7 @@ return {
 			ghost_text = { enabled = false },
 			documentation = { auto_show = true, auto_show_delay_ms = 500 },
 		},
+		-- opts_extend = { "sources.default" },
 	},
-	-- opts_extend = { "sources.default" },
+
 }
