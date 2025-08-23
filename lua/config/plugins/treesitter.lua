@@ -132,12 +132,6 @@ return {
 				},
 			},
 		},
-
-		context = {
-			enable = true,
-			line_numbers = true,
-			multiline_threshold = 20,
-			separator = nil,
-		},
+		context = { max_lines = 1, },
 	},
 }
