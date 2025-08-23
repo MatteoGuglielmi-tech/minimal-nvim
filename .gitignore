@@ -1,3 +1,4 @@
+.env
 spell/
 lua/lualine/
 .DS_STORE
