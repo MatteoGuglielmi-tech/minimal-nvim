@@ -10,14 +10,12 @@ return {
 	event = "VeryLazy",
 	config = function()
 		require("nvim-surround").setup({
-			-- general rule is that if the key ends in "_line", the delimiter pair is added on new lines.
-			-- If the key ends in "_cur", the surround is performed around the current line.
 			keymaps = {
-				normal = "ys",
-				normal_cur = "yss",
+				normal = "yw",
+				normal_cur = "yww",
 				visual = "w",
-				delete = "ds",
-				change = "cs",
+				delete = "dw",
+				change = "cw",
 			},
 		})
 
