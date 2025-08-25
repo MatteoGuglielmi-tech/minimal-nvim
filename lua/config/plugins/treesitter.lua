@@ -13,7 +13,7 @@ return {
 	end,
 
 	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
+		'nvim-treesitter/nvim-treesitter-textobjects',
 		"nvim-treesitter/nvim-treesitter-context",
 	},
 
@@ -84,12 +84,12 @@ return {
 				swap = {
 					enable = true,
 					swap_next = {
-						["<leader>si"] = "@parameter.inner", -- swap parameters/argument with next
-						["<leader>so"] = "@function.outer", -- swap function with next
+						["<leader>si"] = { query = "@parameter.inner", { desc = "Swap parameters/argument with next one" } },
+						["<leader>so"] = { query = "@function.outer", { desc = "Swap function with next one" } },
 					},
 					swap_previous = {
-						["<leader>pi"] = "@parameter.inner", -- swap parameters/argument with prev
-						["<leader>po"] = "@function.outer", -- swap function with previous
+						["<leader>pi"] = { query = "@parameter.inner", { desc = "Swap parameters/argument with prev one" } },
+						["<leader>po"] = { query = "@function.outer", { desc = "Swap function with prev one" } },
 					},
 				},
 
@@ -97,33 +97,24 @@ return {
 					enable = true,
 					set_jumps = true,
 					goto_next_start = {
-						["]f"] = { query = "@call.outer", { desc = "Next function call start" } },
 						["]m"] = { query = "@function.outer", { desc = "Next method/function def start" } },
 						["]c"] = { query = "@class.outer", { desc = "Next class start" } },
 						["]i"] = { query = "@conditional.outer", { desc = "Next conditional start" } },
-						["]l"] = { query = "@loop.outer", { desc = "Next loop start" } },
-
-						-- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-						-- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-						["]s"] = { query = "@scope", query_group = "locals", { desc = "Next scope" } },
-						["]z"] = { query = "@fold", query_group = "folds", { desc = "Next fold" } },
+						["]o"] = { query = "@loop.outer", { desc = "Next loop start" } },
 					},
 					goto_next_end = {
-						["]F"] = { query = "@call.outer", { desc = "Next function call end" } },
 						["]M"] = { query = "@function.outer", { desc = "Next method/function def end" } },
 						["]C"] = { query = "@class.outer", { desc = "Next class end" } },
 						["]I"] = { query = "@conditional.outer", { desc = "Next conditional end" } },
-						["]L"] = { query = "@loop.outer", { desc = "Next loop end" } },
+						["]O"] = { query = "@loop.outer", { desc = "Next loop end" } },
 					},
 					goto_previous_start = {
-						["[f"] = { query = "@call.outer", { desc = "Prev function call start" } },
 						["[m"] = { query = "@function.outer", { desc = "Prev method/function def start" } },
 						["[c"] = { query = "@class.outer", { desc = "Prev class start" } },
 						["[i"] = { query = "@conditional.outer", { desc = "Prev conditional start" } },
 						["[l"] = { query = "@loop.outer", { desc = "Prev loop start" } },
 					},
 					goto_previous_end = {
-						["[F"] = { query = "@call.outer", { desc = "Prev function call end" } },
 						["[M"] = { query = "@function.outer", { desc = "Prev method/function def end" } },
 						["[C"] = { query = "@class.outer", { desc = "Prev class end" } },
 						["[I"] = { query = "@conditional.outer", { desc = "Prev conditional end" } },
