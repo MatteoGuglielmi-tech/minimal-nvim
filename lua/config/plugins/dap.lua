@@ -82,9 +82,6 @@ return {
 
 		local ivy_theme = require("telescope.themes").get_ivy()
 		local themed_dap = {
-			list_breakpoints = function()
-				require("telescope").extensions.dap.list_breakpoints(ivy_theme)
-			end,
 			variables = function()
 				require("telescope").extensions.dap.variables(ivy_theme)
 			end,
@@ -96,10 +93,18 @@ return {
 			end
 		}
 
-		vim.keymap.set('n', '<leader>dl', themed_dap.list_breakpoints, { desc = "[D]AP: [L]ist Breakpoints" })
+		local callback_lbs = function ()
+			require("telescope").extensions.dap.list_breakpoints()
+		end
+		local callback_dap_cmds = function ()
+			require('telescope').extensions.dap.commands()
+		end
+
+		vim.keymap.set('n', '<leader>dl', callback_lbs, { desc = "[D]AP: [L]ist Breakpoints" })
 		vim.keymap.set('n', '<leader>dv', themed_dap.variables, { desc = "[D]AP: List [V]ariables" })
 		vim.keymap.set('n', '<leader>dp', themed_dap.scopes, { desc = "[D]AP: List Sco[p]es" })
 		vim.keymap.set('n', '<leader>df', themed_dap.frames, { desc = "[D]AP: List [F]rames" })
+		vim.keymap.set('n', '<leader>dc', callback_dap_cmds, { desc = "[D]AP: List [F]rames" })
 
 		local function resize_float(direction)
 			local win_id = vim.api.nvim_get_current_win()
