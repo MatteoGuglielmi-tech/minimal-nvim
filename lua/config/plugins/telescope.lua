@@ -39,6 +39,7 @@ return {
 		require("telescope").load_extension("ui-select")
 		require("telescope").load_extension("bookmarks")
 		require("telescope").load_extension("dap")
+		require("telescope").load_extension("noice") -- show message history --
 
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })

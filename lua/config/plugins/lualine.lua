@@ -1,14 +1,16 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	-- dependencies = { "nvim-tree/nvim-web-devicons" },
-	dependencies = { "echasnovski/mini.icons" },
+	dependencies = {
+		{ "echasnovski/mini.icons" },
+		{ "folke/noice.nvim" },
+	},
 
 	config = function()
 		local lualine = require("lualine")
 
 		lualine.setup({
 			options = {
-				theme = "vague", --"rose-pine",
+				theme = "auto", --"rose-pine",
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 			},
@@ -16,13 +18,13 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = {
 					{ "branch", icon = "" },
-					-- "harpoon_component",
 					{
 						"diff",
 						colored = true,
 						symbols = { added = "+", modified = "~", removed = "-" }, -- Changes the symbols used by the diff.
 						source = nil,
 					},
+					{ "lsp_status" },
 					{
 						"diagnostics",
 						sources = { "nvim_diagnostic" },
@@ -35,23 +37,18 @@ return {
 				},
 				lualine_c = {
 					{
-						-- symbols.get,
-						-- cond = symbols.has,
+						require("noice").api.status.mode.get,
+						cond = require("noice").api.status.mode.has,
+						color = { fg = "#ff9e64" },
 					},
 				},
 				lualine_x = {
-					-- {
-					-- 	lazy_status.updates,
-					-- 	cond = lazy_status.has_updates,
-					-- 	color = { fg = "#ff9e64" },
-					-- },
 					{ "encoding" },
 					{
 						"fileformat",
 						symbols = {
-							mac = "", -- e711
-							unix = "", -- e712
-							-- dos = "", -- e70f
+							mac = "",
+							unix = "",
 						},
 					},
 					{ "filetype" },
