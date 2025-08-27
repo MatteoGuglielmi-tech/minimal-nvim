@@ -38,10 +38,6 @@ return {
 			require("neotest").run.stop()
 		end, { desc = "[N]eotest: [s]top nearest test" })
 
-		vim.keymap.set("n", "<leader>na", function()
-			require("neotest").run.attach()
-		end, { desc = "[N]eotst: [a]ttach the nearest test" })
-
 		vim.keymap.set("n", "<leader>no", function()
 			require("neotest").output.open({ enter = true, short = true })
 		end, { desc = "[N]eotest: displays nearest test [o]utput" })
