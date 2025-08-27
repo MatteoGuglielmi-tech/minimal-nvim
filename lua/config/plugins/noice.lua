@@ -16,7 +16,7 @@ return {
 				},
 			},
 			presets = {
-				bottom_search = true, -- use a classic bottom cmdline for search
+				bottom_search = false, -- use a classic bottom cmdline for search
 				command_palette = true, -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
 				inc_rename = false,
@@ -27,5 +27,6 @@ return {
 		vim.keymap.set("n", "<leader>nm", "<cmd>Noice telescope<CR>", { desc = "Show [N]eovim [M]essages in Telescope view." })
 		vim.keymap.set("n", "<leader>ne", "<cmd>Noice errors<CR>", { desc = "Show [N]eovim [E]rror messages in Telescope view." })
 		vim.keymap.set("n", "<leader>nl", "<cmd>Noice last<CR>", { desc = "Show [N]eovim [L]ast message in a popup view." })
+		vim.keymap.set("n", "<leader>na", "<cmd>Noice all<CR>" ,{ desc = "Show [N]eovim all messages." })
 	end,
 }
