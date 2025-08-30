@@ -47,22 +47,22 @@ return {
 		end
 
 		--- setting keymaps ---
-		vim.keymap.set("n", "<F5>", dap.continue, { desc = "DAP: Start/Continue" })
-		vim.keymap.set("n", "<S-F5>", dap.restart, { desc = "DAP: ReStart" })
-		vim.keymap.set("n", "<leader>dq", dap.terminate, { desc = "DAP : Terminate" })
-		-- vim.keymap.set("n", "<C-M-F5>", dap.close, { desc = "DAP : Close" })
-		vim.keymap.set("n", "<F6>", dap.run_to_cursor, { desc = "DAP: Run to cursor" })
-		vim.keymap.set("n", "<F10>", dap.step_over, { desc = "DAP: Step Over" })
-		vim.keymap.set("n", "<F11>", dap.step_into, { desc = "DAP: Step Into" })
-		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "DAP: Step Out" })
-		vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
+		vim.keymap.set("n", "<F5>", dap.continue, { desc = "Dap: Start/Continue" })
+		vim.keymap.set("n", "<S-F5>", dap.restart, { desc = "Dap: ReStart" })
+		vim.keymap.set("n", "<leader>dq", dap.terminate, { desc = "Dap: Terminate" })
+		-- vim.keymap.set("n", "<C-M-F5>", dap.close, { desc = "Dap : Close" })
+		vim.keymap.set("n", "<F6>", dap.run_to_cursor, { desc = "Dap: Run to cursor" })
+		vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Dap: Step over" })
+		vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Dap: Step into" })
+		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Dap: Step out" })
+		vim.keymap.set("n", "<F9>", dap.toggle_breakpoint, { desc = "Dap: Toggle breakpoint" })
 
 		vim.keymap.set("n", "<leader>db", function()
 			local condition = vim.fn.input("Breakpoint Condition: ")
 			dap.set_breakpoint(condition)
-		end, { desc = "DAP: Set Breakpoint with condition" })
+		end, { desc = "[D]ap: Set [b]reakpoint with condition" })
 
-		-- Set a keymap for creating a DAP logpoint
+		-- Set a keymap for creating a Dap logpoint
 		vim.keymap.set("n", "<leader>bl", function()
 			-- Prompt the user for the message to log
 			local log_message = vim.fn.input("Log Message: ")
@@ -70,15 +70,18 @@ return {
 			if log_message ~= "" then
 				dap.set_breakpoint(nil, nil, log_message)
 			end
-		end, { desc = "DAP: Set Log Point" })
+		end, { desc = "Dap: Set [b]reakpoint alike [l]ogpoint" })
 
-		vim.keymap.set("n", "<leader>dD", dap.disconnect, { desc = "DAP: Disconnect" })
-		vim.keymap.set("n", "<leader>di", dap.step_back, { desc = "DAP: Step Back" })
+
+		vim.keymap.set("n", "<leader>dC", dap.clear_breakpoints, { desc = "[D]ap: [C]lear all breakpoints" })
+
+		vim.keymap.set("n", "<leader>dD", dap.disconnect, { desc = "[D]ap: [D]isconnect" })
+		vim.keymap.set("n", "<leader>di", dap.step_back, { desc = "[D]ap: Step back ([i]nverse)" })
 
 		vim.keymap.set("n", "<leader>dK", function()
 			dap.ui.widgets.hover()
-		end, { desc = "DAP: Info expression under cursor" })
-		vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "DAP: Manual Toggle." })
+		end, { desc = "[D]ap: Hover expression under cursor ([K])" })
+		vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "[D]ap: Manual UI [t]oggle." })
 
 		local ivy_theme = require("telescope.themes").get_ivy()
 		local themed_dap = {
@@ -100,11 +103,11 @@ return {
 			require('telescope').extensions.dap.commands()
 		end
 
-		vim.keymap.set('n', '<leader>dl', callback_lbs, { desc = "[D]AP: [L]ist Breakpoints" })
-		vim.keymap.set('n', '<leader>dv', themed_dap.variables, { desc = "[D]AP: List [V]ariables" })
-		vim.keymap.set('n', '<leader>dp', themed_dap.scopes, { desc = "[D]AP: List Sco[p]es" })
-		vim.keymap.set('n', '<leader>df', themed_dap.frames, { desc = "[D]AP: List [F]rames" })
-		vim.keymap.set('n', '<leader>dc', callback_dap_cmds, { desc = "[D]AP: List [F]rames" })
+		vim.keymap.set('n', '<leader>dl', callback_lbs, { desc = "[D]AP: [L]ist lreakpoints" })
+		vim.keymap.set('n', '<leader>dv', themed_dap.variables, { desc = "[D]AP: List [v]ariables" })
+		vim.keymap.set('n', '<leader>dp', themed_dap.scopes, { desc = "[D]AP: List cco[p]es" })
+		vim.keymap.set('n', '<leader>df', themed_dap.frames, { desc = "[D]AP: List [f]rames" })
+		vim.keymap.set('n', '<leader>dc', callback_dap_cmds, { desc = "[D]AP: List [c]ommands" })
 
 		local function resize_float(direction)
 			local win_id = vim.api.nvim_get_current_win()
