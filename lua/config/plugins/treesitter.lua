@@ -12,13 +12,21 @@ return {
 	end,
 
 	dependencies = {
-		'nvim-treesitter/nvim-treesitter-textobjects',
+		"nvim-treesitter/nvim-treesitter-textobjects",
 		"nvim-treesitter/nvim-treesitter-context",
 	},
 
 	main = "nvim-treesitter.configs",
 
 	opts = {
+		ensure_installed = {
+			"rust", "lua", "vim", "vimdoc",
+			"query", "javascript", "typescript",
+			"python", "json", "toml", "markdown",
+		},
+		sync_install = false,
+		auto_install = true,
+
 		highlight = {
 			enable = true,
 			disable = function(lang, buf)
