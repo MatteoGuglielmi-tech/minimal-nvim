@@ -11,6 +11,7 @@ return {
 	keys = {
 		{ "<leader>vs", "<cmd>VenvSelect<CR>" },
 	},
+	enabled = false,
 	opts = {
 		search = {
 			anaconda_base = {
