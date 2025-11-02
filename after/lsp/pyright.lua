@@ -1,3 +1,5 @@
+local lspconfig_utils = require("config.lsp_utils.lsp_utils")
+
 return {
 	filetypes = { "python" },
 	before_init = function(_, config)
