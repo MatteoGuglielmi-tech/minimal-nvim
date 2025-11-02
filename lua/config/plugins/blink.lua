@@ -5,6 +5,7 @@ return {
 		"echasnovski/mini.icons",
 		"moyiz/blink-emoji.nvim",
 		-- "milanglacier/minuet-ai.nvim",
+		"folke/lazydev.nvim",
 	},
 	version = "1.*",
 	opts = {
@@ -23,7 +24,7 @@ return {
 		},
 		signature = { enabled = true },
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "emoji" },
+			default = { "lsp", "path", "snippets", "buffer", "emoji", "lazydev" },
 			providers = {
 				emoji = {
 					module = "blink-emoji",
@@ -44,6 +45,11 @@ return {
 				-- 	timeout_ms = 3000,
 				-- 	score_offset = 50,
 				-- },
+				lazydev = {
+					name = "LazyDev",
+					module = "lazydev.integrations.blink",
+					score_offset = 100,
+				},
 			},
 		},
 
@@ -77,5 +83,4 @@ return {
 		},
 		-- opts_extend = { "sources.default" },
 	},
-
 }
