@@ -26,6 +26,7 @@ require("lazy").setup({
 		{ "nvim-lua/plenary.nvim", priority = 1000 },
 		{ "tpope/vim-sleuth" },
 		{ import = "config.plugins" },
+		{ import = "config.plugins.lsp" },
 	},
 	-- automatically check for plugin updates
 	checker = { enabled = true },
