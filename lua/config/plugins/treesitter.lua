@@ -1,32 +1,52 @@
 ---@diagnostic disable: undefined-field, unused-local
--- -- everything in treesitter is "mapped" to a schema.
--- -- useful cmds: Inspect and InspectTree
+-- useful cmds: Inspect and InspectTree
+
+local ts_textobjects_opts = require("config.treesitter.treesitter-textobjects")
+local ts_context_opts = require("config.treesitter.treesitter-context")
+
 return {
 	"nvim-treesitter/nvim-treesitter",
 	version = false,
 	build = ":TSUpdate",
 	event = { "BufReadPre", "BufNewFile" },
 	lazy = false,
+	dependencies = {
+		-- this is counter intuitive based on names, but `nvim-treesitter-textobjects` needs to be loaded before `treesitter` runs `setup()`
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		{
+		 "nvim-treesitter/nvim-treesitter-context",
+			enabled=false
+		},
+	},
 	init = function(plugin)
 		require("nvim-treesitter.query_predicates")
 	end,
-
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		"nvim-treesitter/nvim-treesitter-context",
-	},
-
 	main = "nvim-treesitter.configs",
-
 	opts = {
 		ensure_installed = {
-			"rust", "lua", "vim", "vimdoc",
-			"query", "javascript", "typescript",
-			"python", "json", "toml", "markdown",
+			"rust",
+			"lua",
+			"c",
+			"cpp",
+			"vim",
+			"vimdoc",
+			"query",
+			"javascript",
+			"typescript",
+			"python",
+			"json",
+			"toml",
+			"markdown",
+			"markdown_inline",
+			"html",
+			"yaml",
+			"latex",
+			"jinja",
+			"jinja_inline",
+			"gitcommit",
 		},
 		sync_install = false,
 		auto_install = true,
-
 		highlight = {
 			enable = true,
 			disable = function(lang, buf)
@@ -39,93 +59,8 @@ return {
 			additional_vim_regex_highlighting = { "markdown", "markdown_inline" },
 		},
 		indent = { enable = true, disable = { "markdown", "markdown_inline" } },
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				init_selection = "<C-space>",
-				node_incremental = "<C-space>",
-				scope_incremental = false,
-				node_decremental = "<bs>",
-			},
-		},
-
-		textobjects = {
-			select = {
-				enable = true,
-				lookahead = true,
-				keymaps = {
-					["a="] = { query = "@assignment.outer", { desc = "Select outer part of an assignment" } },
-					["i="] = { query = "@assignment.inner", { desc = "Select inner part of an assignment" } },
-					["l="] = { query = "@assignment.lhs", { desc = "Select left hand side of an assignment" } },
-					["r="] = { query = "@assignment.rhs", { desc = "Select right hand side of an assignment" } },
-
-					["aa"] = { query = "@parameter.outer", { desc = "Select outer part of a parameter/argument" } },
-					["ia"] = { query = "@parameter.inner", { desc = "Select inner part of a parameter/argument" } },
-
-					["ai"] = { query = "@conditional.outer", { desc = "Select outer part of a conditional" } },
-					["ii"] = { query = "@conditional.inner", { desc = "Select inner part of a conditional" } },
-
-					["al"] = { query = "@loop.outer", { desc = "Select outer part of a loop" } },
-					["il"] = { query = "@loop.inner", { desc = "Select inner part of a loop" } },
-
-					["af"] = { query = "@call.outer", { desc = "Select outer part of a function call" } },
-					["if"] = { query = "@call.inner", { desc = "Select inner part of a function call" } },
-
-					["am"] = {
-						query = "@function.outer",
-						{ desc = "Select outer part of a method/function definition" },
-					},
-					["im"] = {
-						query = "@function.inner",
-						{ desc = "Select inner part of a method/function definition" },
-					},
-
-					["ac"] = { query = "@class.outer", { desc = "Select outer part of a class" } },
-					["ic"] = { query = "@class.inner", { desc = "Select inner part of a class" } },
-				},
-			},
-
-			swap = {
-				enable = true,
-				swap_next = {
-					["<leader>si"] = { query = "@parameter.inner", { desc = "Swap parameters/argument with next one" } },
-					["<leader>so"] = { query = "@function.outer", { desc = "Swap function with next one" } },
-				},
-				swap_previous = {
-					["<leader>pi"] = { query = "@parameter.inner", { desc = "Swap parameters/argument with prev one" } },
-					["<leader>po"] = { query = "@function.outer", { desc = "Swap function with prev one" } },
-				},
-			},
-
-			move = {
-				enable = true,
-				set_jumps = true,
-				goto_next_start = {
-					["}l"] = { query = "@assignment.lhs", { desc = "Go to next left hand side of an assignment" } },
-					["}r"] = { query = "@assignment.rhs", { desc = "Go to next right hand side of an assignment" } },
-					["]m"] = { query = "@function.outer", { desc = "Next method/function def start" } },
-					["]i"] = { query = "@conditional.outer", { desc = "Next conditional start" } },
-					["]o"] = { query = "@loop.outer", { desc = "Next loop start" } },
-				},
-				goto_next_end = {
-					["]M"] = { query = "@function.outer", { desc = "Next method/function def end" } },
-					["]I"] = { query = "@conditional.outer", { desc = "Next conditional end" } },
-					["]O"] = { query = "@loop.outer", { desc = "Next loop end" } },
-				},
-				goto_previous_start = {
-					["{l"] = { query = "@assignment.lhs", { desc = "Go to prev left hand side of an assignment" } },
-					["{r"] = { query = "@assignment.rhs", { desc = "Go to prev right hand side of an assignment" } },
-					["[m"] = { query = "@function.outer", { desc = "Prev method/function def start" } },
-					["[i"] = { query = "@conditional.outer", { desc = "Prev conditional start" } },
-					["[o"] = { query = "@loop.outer", { desc = "Prev loop start" } },
-				},
-				goto_previous_end = {
-					["[M"] = { query = "@function.outer", { desc = "Prev method/function def end" } },
-					["[I"] = { query = "@conditional.outer", { desc = "Prev conditional end" } },
-					["[O"] = { query = "@loop.outer", { desc = "Prev loop end" } },
-				},
-			},
-		},
-		context = { max_lines = 1 },
+		incremental_selection = { enable = false },
+		textobjects = ts_textobjects_opts,
+		context = ts_context_opts,
 	},
 }
