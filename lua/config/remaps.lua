@@ -42,5 +42,5 @@ vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Navigate down on QuickF
 -- keep selection after indentation
 -- Use . to repeat the last indent command (e.g., after >, press . to indent again).
 -- Use gv to reselect the last visual area if needed. 
-vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("x", ">", ">gv")
+vim.keymap.set("x", "<", "<gv")
