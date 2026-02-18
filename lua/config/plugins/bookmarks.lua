@@ -2,6 +2,7 @@ return {
 	"tomasky/bookmarks.nvim",
 	dependencies = { "nvim-telescope/telescope.nvim" },
 	event = "VimEnter",
+	enabled=false,
 	config = function()
 		require("bookmarks").setup({
 			save_file = vim.fn.expand("$HOME/.bookmarks"), -- bookmarks save file path

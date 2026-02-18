@@ -2,6 +2,7 @@ return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
 	event = "VeryLazy",
+	enabled=false,
 	config = function()
 		require("config.toggleterm_utils.tt_utils"):add_execs()
 
