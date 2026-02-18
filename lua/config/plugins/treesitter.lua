@@ -18,10 +18,6 @@ return {
 			enabled=false
 		},
 	},
-	init = function(plugin)
-		require("nvim-treesitter.query_predicates")
-	end,
-	main = "nvim-treesitter.configs",
 	opts = {
 		ensure_installed = {
 			"rust",
