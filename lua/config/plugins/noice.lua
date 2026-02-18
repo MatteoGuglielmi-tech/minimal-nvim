@@ -23,10 +23,9 @@ return {
 				lsp_doc_border = false,
 			},
 		})
-
-		vim.keymap.set("n", "<leader>nm", "<cmd>Noice telescope<CR>", { desc = "Show [N]eovim [M]essages in Telescope view." })
-		vim.keymap.set("n", "<leader>ne", "<cmd>Noice errors<CR>", { desc = "Show [N]eovim [E]rror messages in Telescope view." })
-		vim.keymap.set("n", "<leader>nl", "<cmd>Noice last<CR>", { desc = "Show [N]eovim [L]ast message in a popup view." })
-		vim.keymap.set("n", "<leader>na", "<cmd>Noice all<CR>" ,{ desc = "Show [N]eovim all messages." })
+		vim.keymap.set("n", "<leader>nm", "<cmd>Noice telescope<CR>", { desc = "Show [N]eovim [M]essages" })
+		vim.keymap.set("n", "<leader>ne", "<cmd>Noice errors<CR>", { desc = "Show [N]eovim [E]rrors" })
+		vim.keymap.set("n", "<leader>nl", "<cmd>Noice last<CR>", { desc = "Show [N]eovim [L]ast message" })
+		vim.keymap.set("n", "<leader>na", "<cmd>Noice all<CR>", { desc = "Show [N]eovim [A]ll messages" })
 	end,
 }
