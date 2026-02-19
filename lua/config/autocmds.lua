@@ -81,30 +81,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Jump among diagnostics ---
 		map("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Previous diagnostic")
 		map("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic")
-		map("<leader>tw", "<cmd>Trouble diagnostics<CR>", "Workspace Diagnostic")
-		map("<leader>tb", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", "Buffer Diagnostics")
+    map("<leader>wd", function() Snacks.picker.diagnostics() end, "[W]orkspace [D]iagnostics")
+    map("<leader>bd", function() Snacks.picker.diagnostics({ filter = { buf = 0 } }) end, "[B]uffer [D]iagnostics")
 		--------------------------
 
 		-- Jump around ---
 		--  To jump back, press <C-t>.
-		-- map("gd", require("telescope.builtin").lsp_definitions, "Telescope: [G]oto [D]definition")
     map("gd", function() Snacks.picker.lsp_definitions() end, "Goto Definition")
-		map("<leader>tr", "<cmd>Trouble lsp_references<CR>", "References")
-		map("<leader>ti", "<cmd>Trouble lsp_implementations<CR>", "Implementation")
-		-- map("<leader>gr", require("telescope.builtin").lsp_references, "Telescope: [G]oto [R]eferences")
-    map("<leader>gr", function() Snacks.picker.lsp_references() end, "Goto [R]eferences")
-		-- map("<leader>ti", require("telescope.builtin").lsp_implementations, "[T]elescope: [I]mplementations")
+    map("gD", function() Snacks.picker.lsp_declarations() end, "Goto Declaration")
+
+    vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References"  })
+    map("gi", function() Snacks.picker.lsp_implementations() end, "[G]oto [I]mplementation")
+
+    map("gt", function() Snacks.picker.lsp_type_definitions() end, "[G]oto [T]ype Definition" )
+    -- map("gai", function() Snacks.picker.lsp_incoming_calls() end, "C[a]lls Incoming")
+    -- map("gao", function() Snacks.picker.lsp_outgoing_calls() end, "C[a]lls Outgoing")
 		--------------------------
 
 		-- Fuzzy find symbols ---
     map("<leader>bs", function() Snacks.picker.lsp_symbols() end, "Buffer Symbols")
     map("<leader>ws", function() Snacks.picker.lsp_workspace_symbols() end, "Workspace [S]ymbols")
-		-- map("<leader>bs", require("telescope.builtin").lsp_document_symbols, "Telescope: [B]uffer [S]symbols")
-		-- map(
-		-- 	"<leader>ws",
-		-- 	require("telescope.builtin").lsp_dynamic_workspace_symbols,
-		-- 	"Telescope: [W]orkspace [S]symbols"
-		-- )
 		--------------------------
 
 		-- Rename all occurences of word under cursor ---
