@@ -1,13 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		{
-			"folke/lazydev.nvim",
-			ft = "lua",
-			opts = {
-				library = { { path = "${3rd}/luv/library", words = { "vim%.uv" } } },
-			},
-		},
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "saghen/blink.cmp" },
 		{ "williamboman/mason.nvim" },
