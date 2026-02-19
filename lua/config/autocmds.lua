@@ -8,13 +8,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- set formatoptions for autosaving
 --  c: Auto-wrap comments using textwidth
 --  r: Automatically insert the current comment leader after hitting <Enter> in Insert mode.
 --  o: Automatically insert the current comment leader after hitting 'o' or 'O' in Normal mode.
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	callback = function()
-		vim.cmd("set formatoptions-=cro")
+	vim.opt_local.formatoptions:remove("c")
+	vim.opt_local.formatoptions:append("ro")
 	end,
 })
 
@@ -168,4 +168,10 @@ vim.api.nvim_create_autocmd("User", {
 			Snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
 		end
 	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
 })
