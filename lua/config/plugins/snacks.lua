@@ -3,7 +3,7 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
-		bigfile = { enabled = true, notify = true, size = 1.5 * 1024 * 1024 }, -- 1.5MB
+		bigfile = { enabled = true, notify = true, size = 100 * 1024 * 1024 }, -- 100MiB
 		bufdelete = { enabled = true },
 		gitbrowse = { enabled = true },
 		lazygit = { enabled = true },
@@ -13,12 +13,13 @@ return {
 		scroll = { enabled = false },
 		gh = { enabled = true },
 		terminal = { enabled = true },
-    picker = {
-      enabled = true,
-      layout = { preset = "ivy" },
-    },
+		picker = {
+		  enabled = true,
+		  -- layout = { preset = "vertical" },
+		},
 	},
 	keys = {
+	  { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 		-- Bufdelete
 		{ "Q", function() Snacks.bufdelete() end, desc = "Delete current Buffer" },
     { "<leader>bD", function() Snacks.bufdelete.all() end, desc = "Delete All Buffers" },
@@ -53,7 +54,18 @@ return {
 
     -- Picker (replaces Telescope)
     { "<leader>fh", function() Snacks.picker.help() end, desc = "[F]ind [H]elp" },
-    { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "[F]ind [K]eymaps" },
+    { "<leader>fk", function()
+      Snacks.picker.keymaps({
+        layout = {
+          preset = "vertical",
+          layout = {
+            -- 90% of the screen
+            width = 0.9,
+            height = 0.9,
+          },
+        },
+      })
+    end, desc = "[F]ind [K]eymaps" },
     { "<leader>ff", function() Snacks.picker.files() end, desc = "[F]ind [F]iles" },
     { "<leader>fs", function() Snacks.picker() end, desc = "[F]ind [S]elect Picker" },
     { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "[F]ind current [W]ord" },
