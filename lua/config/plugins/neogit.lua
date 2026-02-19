@@ -1,7 +1,7 @@
 return {
 	"neogitorg/neogit",
 	event = "VeryLazy",
-	enabled=false,
+	enabled = false,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",

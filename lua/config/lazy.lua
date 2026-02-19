@@ -24,7 +24,7 @@ vim.g.maplocalleader = " "
 require("lazy").setup({
 	spec = {
 		{ "nvim-lua/plenary.nvim", priority = 1000 },
-		{ "tpope/vim-sleuth" },
+		-- { "tpope/vim-sleuth" },
 		{ import = "config.plugins" },
 		{ import = "config.plugins.lsp" },
 	},
