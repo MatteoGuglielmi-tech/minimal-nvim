@@ -118,8 +118,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("K", vim.lsp.buf.hover, "Hover Documentation")
 		--------------------------
 
-		-- map("gD", vim.lsp.buf.declaration, "LSP: [G]oto [D]eclaration")
-
 		-- Ghost hints ---
 		map("<leader>th", function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
