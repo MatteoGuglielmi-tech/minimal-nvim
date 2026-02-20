@@ -1,8 +1,6 @@
 ---@diagnostic disable: undefined-field, unused-local
 -- useful cmds: Inspect and InspectTree
 
-local ts_context_opts = require("config.treesitter.treesitter-context")
-
 return {
 	"nvim-treesitter/nvim-treesitter",
 	version = false,
