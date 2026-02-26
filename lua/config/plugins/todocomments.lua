@@ -21,11 +21,37 @@ return {
 			desc = "Todo",
 		},
 		{
+			"<leader>T",
+			function()
+				vim.ui.input({ prompt = "Glob pattern (empty for all): " }, function(glob)
+					if glob and glob ~= "" then
+						Snacks.picker.todo_comments({ glob = glob })
+					else
+						Snacks.picker.todo_comments()
+					end
+				end)
+			end,
+			desc = "Todo with glob",
+		},
+		{
 			"<leader>tc",
 			function()
 				Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "BUG" } })
 			end,
 			desc = "Todo/Fix/Fixme workspace",
+		},
+		{
+			"<leader>tC",
+			function()
+				vim.ui.input({ prompt = "Glob pattern (empty for all): " }, function(glob)
+					if glob and glob ~= "" then
+						Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "BUG" }, glob = glob })
+					else
+						Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "BUG" } })
+					end
+				end)
+			end,
+			desc = "Todo/Fix/Fixme workspace with glob",
 		},
 		{
 			"<leader>tb",

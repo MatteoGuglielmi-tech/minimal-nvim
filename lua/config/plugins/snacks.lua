@@ -74,7 +74,16 @@ return {
     { "<leader>f/", function() Snacks.picker.grep_buffers() end, desc = "[F]ind in Open Files" },
     { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "[F]ind current [W]ord", mode= {"n", "x"} },
     { "<leader>fl", function() Snacks.picker.grep({ live = true }) end, desc = "[F]ind by [G]rep" },
-    { "<leader>fo", function() Snacks.picker.grep({ live = true }) end, desc = "[F]ind by Grep [O]ffline" },
+    { "<leader>fo", function() Snacks.picker.grep() end, desc = "[F]ind by Grep [O]ffline" },
+    { "<leader>fG", function()
+      vim.ui.input({ prompt = "Glob pattern: " }, function(glob)
+        if glob then
+          Snacks.picker.grep({ glob = glob })
+        end
+      end)
+      end,
+      desc = "[F]ind by [G]rep with glob"
+    },
 
     -- Search
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
