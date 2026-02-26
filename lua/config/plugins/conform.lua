@@ -26,18 +26,23 @@ return {
 					end
 				end,
 			},
-			black = {
-				command = function ()
-					local form= formatter_utils.get_formatter_command("black")
-					return form
-				end,
-				prepend_args = { "--fast" },
-			},
+			-- black = {
+			-- 	command = function()
+			-- 		local form = formatter_utils.get_formatter_command("black")
+			-- 		return form
+			-- 	end,
+			-- 	prepend_args = { "--fast" },
+			-- },
 		},
 
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "black" },
+			-- python = { "black" },
+			python = {
+				"ruff_fix", -- Fixes auto-fixable lint errors
+				"ruff_format", -- Runs Ruff's formatter
+				-- "ruff_organize_imports", -- Organizes imports
+			},
 			yaml = { "yamlfix" },
 			markdown = { "prettier", "markdown-toc" },
 			["markdown.mdx"] = { "prettier", "markdown-toc" },
