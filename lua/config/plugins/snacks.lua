@@ -100,11 +100,11 @@ return {
 		-- Terminal
 		{
       [[<C-\>]], function()
-        Snacks.terminal.toggle(nil, { id = "main" })
+        Snacks.terminal.toggle(nil, { count = 1, win = { position = "bottom" } })
       end, desc = "Toggle Terminal", mode = { "n", "t" }
     },
 		{ "<leader>tf", function()
-        Snacks.terminal.toggle(nil, { id = "float", win = { position = "float" } })
+        Snacks.terminal.toggle(nil, { count = 2, win = { position = "float", width = 0.8, height = 0.8 } })
       end, desc = "Toggle Floating Terminal", mode = { "n", "t" }
     },
 		{ "<M-h>", [[<C-\><C-n><C-w>h]], mode = "t" },
