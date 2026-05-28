@@ -79,8 +79,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		-- Jump among diagnostics ---
-		map("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Previous diagnostic")
-		map("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", "Next diagnostic")
+		map("[d", function() vim.diagnostic.jump({ count=1, float = true }) end, "Previous diagnostic")
+		map("]d", function() vim.diagnostic.jump({ count=-1, float = true }) end, "Next diagnostic")
+		map("F", function()
+			local _, winnr = vim.diagnostic.open_float()
+			if winnr then vim.api.nvim_set_current_win(winnr) end
+		end, "Enter diagnostic float")
     map("<leader>wd", function() Snacks.picker.diagnostics() end, "[W]orkspace [D]iagnostics")
     map("<leader>bd", function() Snacks.picker.diagnostics({ filter = { buf = 0 } }) end, "[B]uffer [D]iagnostics")
 		--------------------------
