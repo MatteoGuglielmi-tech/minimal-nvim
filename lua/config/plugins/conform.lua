@@ -37,7 +37,6 @@ return {
 
 		formatters_by_ft = {
 			lua = { "stylua" },
-			-- python = { "black" },
 			python = {
 				"ruff_fix", -- Fixes auto-fixable lint errors
 				"ruff_format", -- Runs Ruff's formatter
@@ -47,6 +46,12 @@ return {
 			markdown = { "prettier", "markdown-toc" },
 			["markdown.mdx"] = { "prettier", "markdown-toc" },
 			rust = { "rustfmt", lsp_format = "fallback" },
+			bash = { "beautysh" },
+			typescript = { "prettier" },
+			javascript = { "prettier" },
+			typescriptreact = { "prettier" },
+			javascriptreact = { "prettier" },
+			html = { "prettier" },
 			["*"] = {},
 		},
 	},

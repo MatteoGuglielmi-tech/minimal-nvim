@@ -11,6 +11,13 @@ return {
 				"texlab",
 				"zls",
 				"clangd",
+				"lemminx",
+				"ts_ls",
+				"angularls",
+			},
+			-- jdtls managed by nvim-jdtls directly, not lspconfig
+			automatic_enable = {
+				exclude = { "jdtls" },
 			},
 		},
 		dependencies = {
@@ -43,10 +50,13 @@ return {
 				"yamlfix",
 				"prettier",
 
+				"jdtls",
+
 				-- linters
 				"cpplint",
 				"commitlint",
 				"shellcheck",
+				"eslint_d",
 			},
 			auto_update = true,
 			run_on_start = true,

@@ -18,6 +18,7 @@ return {
 			"query",
 			"javascript",
 			"typescript",
+			"tsx",
 			"python",
 			"json",
 			"toml",
