@@ -36,9 +36,6 @@ vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make split windows the sam
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split buffer vertically" })
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split buffer horizontally" })
 
-vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>", { desc = "Navigate up on QuickFix list" })
-vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>", { desc = "Navigate down on QuickFix list" })
-
 -- keep selection after indentation
 -- Use . to repeat the last indent command (e.g., after >, press . to indent again).
 -- Use gv to reselect the last visual area if needed. 
