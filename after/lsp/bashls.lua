@@ -1,3 +1,3 @@
 return {
-  filetypes = { "sh" } 
+  filetypes = { "sh" }
 }
