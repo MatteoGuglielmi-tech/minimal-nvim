@@ -1,5 +1,3 @@
-local formatter_utils = require("config.lsp_utils.formatter_utils")
-
 return {
 	"stevearc/conform.nvim",
 	keys = {
@@ -26,13 +24,6 @@ return {
 					end
 				end,
 			},
-			-- black = {
-			-- 	command = function()
-			-- 		local form = formatter_utils.get_formatter_command("black")
-			-- 		return form
-			-- 	end,
-			-- 	prepend_args = { "--fast" },
-			-- },
 		},
 
 		formatters_by_ft = {
