@@ -14,6 +14,7 @@ return {
 				"lemminx",
 				"ts_ls",
 				"angularls",
+				"html",
 			},
 			-- jdtls managed by nvim-jdtls directly, not lspconfig
 			automatic_enable = {
