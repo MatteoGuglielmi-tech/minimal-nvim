@@ -1,14 +1,14 @@
----@diagnostic disable: undefined-field, unused-local
 -- useful cmds: Inspect and InspectTree
-
 return {
 	"nvim-treesitter/nvim-treesitter",
-	version = false,
-	build = ":TSUpdate",
-	event = { "BufReadPre", "BufNewFile" },
+	branch = "main",
 	lazy = false,
-	opts = {
-		ensure_installed = {
+	build = ":TSUpdate",
+	config = function()
+		-- master `ensure_installed` parity: install the fixed set at startup.
+		-- Async; no-op for already-installed parsers. Highlight + auto-install
+		-- live in the FileType autocmd (lua/config/autocmds.lua).
+		require("nvim-treesitter").install({
 			"rust",
 			"lua",
 			"c",
@@ -30,14 +30,10 @@ return {
 			"jinja",
 			"jinja_inline",
 			"gitcommit",
-		},
-		sync_install = false,
-		auto_install = true,
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = { "markdown", "markdown_inline" },
-		},
-		indent = { enable = true, disable = { "markdown", "markdown_inline" } },
-		incremental_selection = { enable = false },
-	},
+			"php",
+			"java",
+			"xml",
+			"zsh",
+		})
+	end,
 }

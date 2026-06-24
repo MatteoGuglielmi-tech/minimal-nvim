@@ -1,3 +1,14 @@
+vim.filetype.add({
+	extension = {
+		engine = "php",
+		inc = "php",
+		install = "php",
+		module = "php",
+		profile = "php",
+		theme = "php",
+	},
+})
+
 -- Highlight when yanking text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
@@ -113,7 +124,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- Check code actions proposed by lsp ---
 		---@diagnostic disable-next-line: missing-parameter, param-type-mismatch
-		if client.supports_method("textDocument/codeAction") then
+		if client:supports_method("textDocument/codeAction", event.buf) then
 			map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 		end
 		--------------------------
@@ -168,8 +179,29 @@ vim.api.nvim_create_autocmd("User", {
 	end,
 })
 
+-- Treesitter highlight per buffer (master `highlight.enable` parity). Global
+-- `syntax on` stays, so markdown keeps TS + vim-regex layering (master
+-- `additional_vim_regex_highlighting`). Indentation is left to Neovim 0.12 native
+-- indentexpr + after/ftplugin. Missing parsers auto-install, then highlight
+-- (master `auto_install = true` parity).
 vim.api.nvim_create_autocmd("FileType", {
-  callback = function()
-    pcall(vim.treesitter.start)
+  callback = function(ev)
+    if pcall(vim.treesitter.start) then
+      return
+    end
+    local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
+    local ok, nts = pcall(require, "nvim-treesitter")
+    if ok and vim.tbl_contains(nts.get_available(), lang) then
+      nts.install(lang):await(function(err)
+        if err then
+          return
+        end
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(ev.buf) then
+            pcall(vim.treesitter.start, ev.buf, lang)
+          end
+        end)
+      end)
+    end
   end,
 })

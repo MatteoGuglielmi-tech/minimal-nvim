@@ -15,6 +15,7 @@ return {
 				"ts_ls",
 				"angularls",
 				"html",
+				"intelephense",
 			},
 			-- jdtls managed by nvim-jdtls directly, not lspconfig
 			automatic_enable = {
@@ -48,9 +49,13 @@ return {
 				"black",
 				"clang-format",
 				"shfmt",
+				"beautysh",
 				"yamlfix",
 				"prettier",
+				"xmlformatter",
+				"google-java-format",
 
+				"tree-sitter-cli",
 				"jdtls",
 
 				-- linters

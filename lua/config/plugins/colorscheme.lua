@@ -16,6 +16,14 @@ return {
 		priority = 1000,
 		name = "rose-pine",
 		config = function()
+			-- @constant defaults to gold, identical to @string (rose-pine.lua:285/219).
+			-- Repaint constants iris so ALL-CAPS names don't read as strings.
+			require("rose-pine").setup({
+				highlight_groups = {
+					["@constant"] = { fg = "iris" },
+					["@constant.builtin"] = { fg = "iris" },
+				},
+			})
 			vim.cmd("colorscheme rose-pine")
 		end,
 	},
