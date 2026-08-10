@@ -6,3 +6,6 @@ lua/.DS_STORE
 *.json
 
 lua/config/floating_term/
+.serena/
+.codegraph/
+AGENTS.md

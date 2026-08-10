@@ -12,6 +12,14 @@ end
 function M.get_pixi_python_path()
 	local pixi_root = vim.fn.expand("$PIXI_PROJECT_ROOT")
 	if pixi_root ~= "" and pixi_root ~= "$PIXI_PROJECT_ROOT" then
+		local environment_name = vim.env.PIXI_ENVIRONMENT_NAME
+		if environment_name and environment_name ~= "" then
+			local python_path = pixi_root .. "/.pixi/envs/" .. environment_name .. "/bin/python"
+			if vim.fn.executable(python_path) == 1 then
+				return python_path
+			end
+		end
+
 		local python_path = pixi_root .. "/.pixi/envs/dev/bin/python"
 		if vim.fn.executable(python_path) == 1 then
 			return python_path

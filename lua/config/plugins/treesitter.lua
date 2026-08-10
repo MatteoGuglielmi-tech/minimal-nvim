@@ -33,7 +33,7 @@ return {
 			"php",
 			"java",
 			"xml",
-			"zsh",
+			"bash", -- zsh filetype highlights via bash (see autocmds.lua register)
 		})
 	end,
 }

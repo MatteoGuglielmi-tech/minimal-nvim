@@ -24,7 +24,7 @@ return {
 					["@constant.builtin"] = { fg = "iris" },
 				},
 			})
-			vim.cmd("colorscheme rose-pine")
+			vim.cmd("colorscheme rose-pine-moon")
 		end,
 	},
 

@@ -8,7 +8,27 @@ return {
 		gitbrowse = { enabled = true },
 		lazygit = { enabled = true },
 		rename = { enabled = true },
-		scratch = { enabled = true },
+    scratch = {
+      enabled = true,
+      win_by_ft = {
+        python = {
+          keys = {
+            run = {
+              "<CR>",
+              function(self)
+                vim.cmd.write()
+                Snacks.terminal.open(
+                  { "python3", vim.api.nvim_buf_get_name(self.buf) },
+                  { win = { position = "bottom" }
+                })
+              end,
+              desc = "Run Python scratch",
+              mode = "n",
+            },
+          },
+        },
+      },
+    },
 		image = { enabled = true },
 		scroll = { enabled = false },
 		gh = { enabled = true },
@@ -96,6 +116,7 @@ return {
 		-- Scratch
 		{ "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
 		{ "<leader>.a", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+		{ "<leader>.p", function() 	Snacks.scratch({ ft = "python" }) end, desc = "Toggle Scratch Buffer Python" },
 
 		-- Terminal
 		{

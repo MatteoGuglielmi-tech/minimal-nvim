@@ -1,5 +1,6 @@
 vim.filetype.add({
 	extension = {
+		mdx = "markdown",
 		engine = "php",
 		inc = "php",
 		install = "php",
@@ -178,6 +179,11 @@ vim.api.nvim_create_autocmd("User", {
 		end
 	end,
 })
+
+-- The zsh tree-sitter grammar mis-parses real configs (whole regions flip to
+-- one color after an error). Highlight zsh buffers with the bash parser instead,
+-- matching master's behaviour. `get_lang("zsh")` now returns "bash".
+vim.treesitter.language.register("bash", "zsh")
 
 -- Treesitter highlight per buffer (master `highlight.enable` parity). Global
 -- `syntax on` stays, so markdown keeps TS + vim-regex layering (master
