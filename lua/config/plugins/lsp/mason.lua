@@ -51,6 +51,7 @@ return {
 				"shfmt",
 				"beautysh",
 				"yamlfix",
+				"jq",
 				"prettier",
 				"xmlformatter",
 				"google-java-format",

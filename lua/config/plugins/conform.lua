@@ -27,6 +27,8 @@ return {
 		},
 
 		formatters_by_ft = {
+			json = { "jq" },
+			jsonc = { "prettier" },
 			lua = { "stylua" },
 			python = {
 				"ruff_fix", -- Fixes auto-fixable lint errors
