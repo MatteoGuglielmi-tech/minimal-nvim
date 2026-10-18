@@ -1,6 +1,6 @@
 return {
 	"mrcjkb/rustaceanvim",
-	version = "^6",
+	version = "^9",
 	lazy = false,
 	init = function()
 		vim.g.rustaceanvim = {
@@ -40,7 +40,6 @@ return {
 							hideClosureInitialization = false,
 							hideNamedConstructor = false,
 						},
-						checkOnSave = false,
 					},
 				},
 				-- DAP configuration

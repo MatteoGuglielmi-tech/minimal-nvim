@@ -141,9 +141,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- enable inlay hints automatically when the LSP attaches
 		-- vim.lsp.inlay_hint.enable(true, { buffer = bufnr })
-		vim.keymap.set("n", "<leader>nb", function()
-		  require("nvim-navbuddy").open()
-		end, { desc= "[N]av[B]uddy" })
+		-- navbuddy was removed from the plugin set, so this keymap only errored
+		-- vim.keymap.set("n", "<leader>nb", function()
+		--   require("nvim-navbuddy").open()
+		-- end, { desc= "[N]av[B]uddy" })
 		--------------------------
 	end,
 })

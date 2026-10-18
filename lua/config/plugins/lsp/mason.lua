@@ -18,8 +18,11 @@ return {
 				"intelephense",
 			},
 			-- jdtls managed by nvim-jdtls directly, not lspconfig
+			-- rust_analyzer is managed by rustaceanvim, which starts its own
+			-- client; letting lspconfig enable it too spawns a second
+			-- rust-analyzer on every Rust buffer.
 			automatic_enable = {
-				exclude = { "jdtls" },
+				exclude = { "jdtls", "rust_analyzer" },
 			},
 		},
 		dependencies = {
