@@ -1,20 +1,10 @@
 return {
-  {
-    name = "darcula",
-    dir = vim.fn.stdpath("config"),
-    lazy = false,
-    enabled = false,
-    priority = 1000,
-    config = function()
-        vim.cmd.colorscheme("darcula")
-      end,
-  },
-
 	{
 		"rose-pine/neovim",
 		lazy = false,
 		priority = 1000,
 		name = "rose-pine",
+		-- enabled = false,
 		config = function()
 			-- @constant defaults to gold, identical to @string (rose-pine.lua:285/219).
 			-- Repaint constants iris so ALL-CAPS names don't read as strings.
@@ -47,7 +37,10 @@ return {
 		lazy = false,
 		enabled = false,
 		config = function()
-			vim.cmd.colorscheme("catppuccin-macchiato")
+			require("catppuccin").setup({
+				flavour = "macchiato", -- latte, frappe, macchiato, mocha
+			})
+			vim.cmd.colorscheme("catppuccin-nvim")
 		end,
 	},
 }
