@@ -2,6 +2,9 @@ return {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	opts = {
+		spec = {
+			{ "<leader>M", group = "Markdown" },
+		},
 		plugins = {
 			spelling = { enabled = true },
 			presets = {
